@@ -3,13 +3,33 @@
 <div class="col-md-9 mb-2">
 
 <?php
+ $toko = mysqli_query($conn,"SELECT * FROM fleet_info ");
+ if (mysqli_num_rows($toko) > 0) {
+     // Data ditemukan, mengambil data
+     if ($row = mysqli_fetch_assoc($toko)) {
+         $Tanggal = $row['Tanggal'];
+         $Grup = $row['Grup'];
+         $Shift = $row['Shift'];
+
+     }
+ } else {
+     // Tabel kosong, mengatur variabel menjadi null
+     $Tanggal = null;
+     $Grup = null;
+     $Shift = null;
+ }
 if(!empty($_POST['add_data'])){
-    if(isset($_POST['DT']) && isset($_POST['loading']) && isset($_POST['dumping']) && isset($_POST['jarak']) && isset($_POST['tonase']) && isset($_POST['kode'])){
-        $unit = $_POST['id_exca'];
-        $mitra = $_POST['dt'];
+    if(isset($_POST['DT']) && isset($_POST['loading']) && isset($_POST['dumping']) && isset($_POST['jarak']) && isset($_POST['tonase']) && isset($_POST['jam'])&& isset($_POST['waktu'])){
+        $unit = $_POST['DT'];
+        $lp = $_POST['loading'];
+        $dp = $_POST['dumping'];
+        $jarak = $_POST['jarak'];
+        $tonase = $_POST['tonase'];
+        $jam = $_POST['jam'];
+        $waktu = $_POST['waktu'];
 
         // Periksa apakah kedua data sudah dipilih
-        if (empty($unit) || empty($mitra)) {
+        if (empty($unit) || empty($lp) || empty($dp)) {
             echo "
             <div class='alert alert-danger alert-dismissible fade show' role='alert'>
                 <strong>NOOO!</strong> Harap pilih Exca dan Dump Truck terlebih dahulu.
@@ -31,13 +51,13 @@ if(!empty($_POST['add_data'])){
                 </div>
                 ";
             } else {
-                mysqli_query($conn, "insert into setting_dt values('', '$unit', '$mitra')")
+                mysqli_query($conn, "insert into temporary values('', '$Tanggal', '$unit','$tonase','$lp','$dp','$jarak')")
                 or die(mysqli_error($conn));
                 
-                echo '<script>window.location="setting_dt.php"</script>';
+                echo '<script>window.location="index.php"</script>';
                 echo "
                 <div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                    <strong>NOOO!</strong> Data yang diinput sudah ada.
+                    <strong>YESS!</strong> WKWKWKWKWK.
                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                         <span aria-hidden='true'>&times;</span>
                     </button>
@@ -46,9 +66,10 @@ if(!empty($_POST['add_data'])){
             }
         }
     } else {
+
         echo "
         <div class='alert alert-danger alert-dismissible fade show' role='alert'>
-            <strong>NOOO!</strong> Harap pilih Exca dan Dump Truck terlebih dahulu.
+            <strong>NOOO!</strong> SERVER ERROR.
             <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                 <span aria-hidden='true'>&times;</span>
             </button>
@@ -107,7 +128,15 @@ if(!empty($_POST['add_data'])){
 
                             <div class="form-group col-md-6">
                                 <label><b>Jarak</b></label>
-                                <input type="text" id="jarak" name="jarak" class="form-control" disabled>
+                                <input type="text" id="jarak" name="jarak" class="form-control" readonly>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label><b>Jam Dumping</b></label>
+                                <input type="time"  name="jam" class="form-control" >
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label><b>Waktu</b></label>
+                                <input type="number"  name="waktu" class="form-control" >
                             </div>
 
                             <div class="form-group col-md-6">
@@ -137,39 +166,7 @@ if(!empty($_POST['add_data'])){
 
             <div class="card-body">
             <?php 
-                function generateRandomCode($length = 6) {
-                    $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                    $code = '';
-
-                    for ($i = 0; $i < $length; $i++) {
-                        $code .= $characters[rand(0, strlen($characters) - 1)];
-                    }
-
-                    return $code;
-                }
-
-              
-                // Cek apakah kode acak sudah ada dalam sesi
-                if (!isset($_SESSION['randomCode'])) {
-                    // Jika tidak ada, maka hasilkan kode acak baru
-                    $_SESSION['randomCode'] = generateRandomCode(6);
-                }
-
-                $toko = mysqli_query($conn,"SELECT * FROM fleet_info ");
-                if (mysqli_num_rows($toko) > 0) {
-                    // Data ditemukan, mengambil data
-                    if ($row = mysqli_fetch_assoc($toko)) {
-                        $Tanggal = $row['Tanggal'];
-                        $Grup = $row['Grup'];
-                        $Shift = $row['Shift'];
-
-                    }
-                } else {
-                    // Tabel kosong, mengatur variabel menjadi null
-                    $Tanggal = null;
-                    $Grup = null;
-                    $Shift = null;
-                }
+               
                 ?>
                     <div class="form-row">
                         <div class="form-group col-md-3">
@@ -206,18 +203,18 @@ if(!empty($_POST['add_data'])){
                         <tbody>
                         <?php 
                         $no = 1;
-                        $data_barang = mysqli_query($conn,"select * from temporary order by id_temporary DESC");
+                        $data_barang = mysqli_query($conn,"select * from temporary where tanggal='$Tanggal' order by id_temporary DESC");
                         while($d = mysqli_fetch_array($data_barang)){
                             ?>
                         <tr>
-                            <td><?php echo $no++; ?></td>
-                            <td><?php echo $d['Nama_loading']; ?></td>
-                            <td><?php echo $d['Nama_dumping']; ?></td>
+                            <td><?php echo $no++; ?></td> 
+                            <td><?php echo $d['loading_point']; ?></td>
+                            <td><?php echo $d['dumping_point']; ?></td>
                             <td><?php echo $d['jarak']; ?></td>
                             <td>
-                                <a class="btn btn-primary btn-xs" href="edit_jarak.php?id=<?php echo $d['Id_jarak']; ?>">
+                                <a class="btn btn-primary btn-xs" href="edit_jarak.php?id=<?php echo $d['id_temporary']; ?>">
                                 <i class="fa fa-pen fa-xs"></i> Edit</a>
-                                <a class="btn btn-danger btn-xs" href="?id=<?php echo $d['Id_jarak']; ?>" 
+                                <a class="btn btn-danger btn-xs" href="?id=<?php echo $d['id_temporary']; ?>" 
                                 onclick="javascript:return confirm('Hapus Data Jarak ?');">
                                 <i class="fa fa-trash fa-xs"></i> Hapus</a>
                             </td>
@@ -226,6 +223,11 @@ if(!empty($_POST['add_data'])){
 					</tbody>
                 </table>
             </div>
+            <form method="POST" class="d-flex justify-content-end">
+    <button name="add_data" value="simpan" class="btn btn-purple m-2" type="submit">
+        <i class="fa fa-plus mr-2"></i>SIMPAN
+    </button>
+</form>
         </div>
     </div>
     <!-- end table barang -->
