@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2023 at 10:08 AM
+-- Generation Time: Nov 07, 2023 at 09:27 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -85,7 +85,7 @@ CREATE TABLE `fleet_info` (
 --
 
 INSERT INTO `fleet_info` (`id`, `Tanggal`, `Shift`, `Grup`) VALUES
-(8, '6 November 2023 07:00:51', 'Shift 3', 'Grup A');
+(8, '7 November 2023 03:09:54', 'Shift 2', 'Grup B');
 
 -- --------------------------------------------------------
 
@@ -109,7 +109,7 @@ INSERT INTO `jarak` (`Id_jarak`, `Nama_loading`, `Nama_dumping`, `jarak`) VALUES
 (2, 'DH 4', 'Ts Merbau', 8),
 (3, 'Ts Niru', 'DH 4', 40.6),
 (5, 'Ts Merbau', 'DH 4', 20),
-(6, 'Ts Aren', 'DH 4', 90);
+(6, 'Ts Aren', 'DH 4', 2);
 
 -- --------------------------------------------------------
 
@@ -215,13 +215,25 @@ INSERT INTO `setting_fleet` (`Id_setting`, `id_info`, `Exca`, `Nama_loading`, `L
 
 CREATE TABLE `temporary` (
   `id_temporary` int(11) NOT NULL,
-  `kode` varchar(50) NOT NULL,
+  `tanggal` varchar(50) NOT NULL,
   `setting_dt` int(11) NOT NULL,
   `tonase` double NOT NULL,
   `loading_point` varchar(150) NOT NULL,
   `dumping_point` varchar(150) NOT NULL,
-  `jarak` varchar(150) NOT NULL
+  `jarak` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `temporary`
+--
+
+INSERT INTO `temporary` (`id_temporary`, `tanggal`, `setting_dt`, `tonase`, `loading_point`, `dumping_point`, `jarak`) VALUES
+(2, '7 November 2023 07:07:49', 1, 22, 'Ts Aren', 'DH 4', ''),
+(3, '7 November 2023 07:07:49', 1, 22, 'Ts Aren', 'DH 4', '2 km'),
+(4, '7 November 2023 07:07:49', 1, 66, 'Ts Aren', 'DH 4', '2 km'),
+(5, '7 November 2023 07:07:49', 5, 40, 'Ts Merbau', 'DH 4', '20 km'),
+(6, '7 November 2023 07:07:49', 2, 44, 'Ts Merbau', 'DH 4', '20 km'),
+(7, '7 November 2023 07:07:49', 1, 90, 'Ts Merbau', 'DH 4', '20 km');
 
 -- --------------------------------------------------------
 
@@ -534,7 +546,7 @@ ALTER TABLE `setting_fleet`
 -- AUTO_INCREMENT for table `temporary`
 --
 ALTER TABLE `temporary`
-  MODIFY `id_temporary` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_temporary` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `unit_dt`
