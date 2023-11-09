@@ -18,8 +18,18 @@
      $Grup = null;
      $Shift = null;
  }
+
+//  $tonase = mysqli_query($conn,"SELECT * FROM fleet_info ");
+//  if(mysqli_num_rows($tonase)>0){
+//     if ($row = mysqli_fetch_assoc($toko)) {
+//         $Tanggal = $row['Tanggal'];
+//         $Grup = $row['Grup'];
+//         $Shift = $row['Shift'];
+
+//     }
+//  }
 if(!empty($_POST['add_data'])){
-    if(isset($_POST['DT']) && isset($_POST['loading']) && isset($_POST['dumping']) && isset($_POST['jarak']) && isset($_POST['tonase']) && isset($_POST['jam'])&& isset($_POST['waktu'])){
+    if(isset($_POST['DT']) && isset($_POST['loading']) && isset($_POST['dumping']) && isset($_POST['jarak']) && isset($_POST['jam'])&& isset($_POST['waktu'])){
         $unit = $_POST['DT'];
         $lp = $_POST['loading'];
         $dp = $_POST['dumping'];
@@ -40,18 +50,18 @@ if(!empty($_POST['add_data'])){
             ";
         } else {
             // Data belum ada, lakukan penyisipan
-            $cek = mysqli_query($conn, "SELECT * FROM setting_dt WHERE id_setting_fleet = '$unit' AND Nama_DT = '$mitra'");
-            if (mysqli_num_rows($cek) > 0) {
-                echo "
-                <div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                    <strong>NOOO!</strong> Data yang diinput sudah ada.
-                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                        <span aria-hidden='true'>&times;</span>
-                    </button>
-                </div>
-                ";
-            } else {
-                mysqli_query($conn, "insert into temporary values('', '$Tanggal', '$unit','$tonase','$lp','$dp','$jarak')")
+            // $cek = mysqli_query($conn, "SELECT * FROM temporary WHERE id_setting_fleet = '$unit' AND Nama_DT = '$unit'");
+            // if (mysqli_num_rows($cek) > 0) {
+            //     echo "
+            //     <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+            //         <strong>NOOO!</strong> Data yang diinput sudah ada.
+            //         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+            //             <span aria-hidden='true'>&times;</span>
+            //         </button>
+            //     </div>
+            //     ";
+            // }else{
+                mysqli_query($conn, "insert into temporary values('', '$Tanggal','$Shift','$Grup', '$unit','$tonase','$lp','$dp','$jarak','$jam','$waktu',NULL)")
                 or die(mysqli_error($conn));
                 
                 echo '<script>window.location="index.php"</script>';
@@ -63,8 +73,9 @@ if(!empty($_POST['add_data'])){
                     </button>
                 </div>
                 ";
-            }
-        }
+            
+        // }
+    }
     } else {
 
         echo "
@@ -77,6 +88,26 @@ if(!empty($_POST['add_data'])){
         ";
     }
 }
+
+
+//simpan info
+if(!empty($_POST['simpan_laporan'])){
+    mysqli_query($conn, "insert into temporary values('', '$Tanggal', '$unit','$tonase','$lp','$dp','$jarak',NULL)")
+    or die(mysqli_error($conn));
+    
+    echo '<script>window.location="index.php"</script>';
+    echo "
+    <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+        <strong>YESS!</strong> WKWKWKWKWK.
+        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+            <span aria-hidden='true'>&times;</span>
+        </button>
+    </div>
+    ";
+
+}
+
+
 ?>
     <div class="row">
 
@@ -138,7 +169,7 @@ if(!empty($_POST['add_data'])){
                                 <label><b>Waktu</b></label>
                                 <input type="number"  name="waktu" class="form-control" >
                             </div>
-
+                           
                             <div class="form-group col-md-6">
                                 <label><b>Tonase</b></label>
                                 <div class="input-group">
@@ -169,21 +200,19 @@ if(!empty($_POST['add_data'])){
                
                 ?>
                     <div class="form-row">
-                        <div class="form-group col-md-3">
-                        <input type="text" class="form-control" name="tgl_input" value="<?php echo $_SESSION['randomCode'];?>" readonly>
-                        </div>
+                       
 
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                         <input type="text" class="form-control" name="tgl_input" value="<?php echo  $Tanggal;?>" readonly>
                         </div>
 
               
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                         <input type="text" class="form-control" name="tgl_input" value="<?php echo  $Grup;?>" readonly>
                         </div>
  
         
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                         <input type="text" class="form-control" name="tgl_input" value="<?php echo  $Shift;?>" readonly>
                         </div>
                     </div>
@@ -194,23 +223,29 @@ if(!empty($_POST['add_data'])){
                         <thead class="thead-purple">
                             <tr>
                                 <th>No</th>
+                                <th>DT</th>
                                 <th>Nama Loading</th>
                                 <th>Nama Dumping</th>
                                 <th>Jarak</th>
+                                <th>Tonase</th>
+                                <th>Publish</th>
                                 <th>Opsi</th>
                             </tr>
                         </thead>
                         <tbody>
                         <?php 
                         $no = 1;
-                        $data_barang = mysqli_query($conn,"select * from temporary where tanggal='$Tanggal' order by id_temporary DESC");
+                        $data_barang = mysqli_query($conn,"select * from temporary inner join setting_dt on setting_dt.id_setting_dt = temporary.setting_dt where tanggal='$Tanggal'  order by id_temporary DESC");
                         while($d = mysqli_fetch_array($data_barang)){
                             ?>
                         <tr>
                             <td><?php echo $no++; ?></td> 
+                            <td><?php echo $d['Nama_DT']; ?></td> 
                             <td><?php echo $d['loading_point']; ?></td>
                             <td><?php echo $d['dumping_point']; ?></td>
                             <td><?php echo $d['jarak']; ?></td>
+                            <td><?php echo $d['tonase']; ?></td>
+                            <td><?php echo $d['created']; ?></td>
                             <td>
                                 <a class="btn btn-primary btn-xs" href="edit_jarak.php?id=<?php echo $d['id_temporary']; ?>">
                                 <i class="fa fa-pen fa-xs"></i> Edit</a>
@@ -224,7 +259,7 @@ if(!empty($_POST['add_data'])){
                 </table>
             </div>
             <form method="POST" class="d-flex justify-content-end">
-    <button name="add_data" value="simpan" class="btn btn-purple m-2" type="submit">
+    <button name="simpan_laporan" value="simpan" class="btn btn-purple m-2" type="submit">
         <i class="fa fa-plus mr-2"></i>SIMPAN
     </button>
 </form>
@@ -268,6 +303,7 @@ if(!empty($_POST['add_data'])){
     var selectElement = document.getElementById('dt');
     var loadingSelect = document.getElementById('loading');
     var dumpingSelect = document.getElementById('dumping');
+    var tonaseInput = document.getElementById('tonase');
 
     // Tambahkan event listener untuk mengidentifikasi perubahan nilai pada elemen "dt"
     selectElement.addEventListener('change', function() {
@@ -279,45 +315,59 @@ if(!empty($_POST['add_data'])){
         xhr.open('GET', 'get_data.php?nama_dt=' + selectedValue, true);
 
         xhr.onload = function () {
-            if (xhr.status === 200) {
-                // Parsing data yang diterima dari server
-                var data = JSON.parse(xhr.responseText);
+    if (xhr.status === 200) {
+        // Parsing data yang diterima dari server
+        var data = JSON.parse(xhr.responseText);
 
-                // Mengisi elemen "loadingSelect" dengan opsi yang diterima
-                loadingSelect.innerHTML = ''; // Menghapus opsi yang sudah ada
+        var jenisPengukuran = data[0].Pengukuran;
+        console.log(jenisPengukuran);
+  
 
-                var defaultOption = document.createElement('option');
-                defaultOption.text = 'Pilih';
-                defaultOption.value = '';
-                loadingSelect.appendChild(defaultOption);
+        // Mengisi elemen "loadingSelect" dengan opsi yang diterima
+        loadingSelect.innerHTML = ''; // Menghapus opsi yang sudah ada
 
-                for (var i = 0; i < data.length; i++) {
-                    var option = document.createElement('option');
-                    option.text = data[i].loading;
-                    option.value = data[i].loading;
-                    loadingSelect.appendChild(option);
-                }
+        var defaultOption = document.createElement('option');
+        defaultOption.text = 'Pilih';
+        defaultOption.value = '';
+        loadingSelect.appendChild(defaultOption);
 
-                 // Mengisi elemen "dumpingSelect" dengan opsi yang diterima
-                 dumpingSelect.innerHTML = ''; // Menghapus opsi yang sudah ada
+        for (var i = 1; i < data.length; i++) {
+            var option = document.createElement('option');
+            option.text = data[i].loading;
+            option.value = data[i].loading;
+            loadingSelect.appendChild(option);
+        }
 
-                    var defaultOptionDumping = document.createElement('option');
-                    defaultOptionDumping.text = 'Pilih Dumping';
-                    defaultOptionDumping.value = '';
-                    dumpingSelect.appendChild(defaultOptionDumping);
+        // Mengisi elemen "dumpingSelect" dengan opsi yang diterima
+        dumpingSelect.innerHTML = ''; // Menghapus opsi yang sudah ada
 
-                    for (var i = 0; i < data.length; i++) {
-                        var option = document.createElement('option');
-                        option.text = data[i].dumping; // Sesuaikan dengan nama kolom yang sesuai
-                        option.value = data[i].dumping; // Sesuaikan dengan nama kolom yang sesuai
-                        dumpingSelect.appendChild(option);
-                    }
-            }
-        };
+        var defaultOptionDumping = document.createElement('option');
+        defaultOptionDumping.text = 'Pilih Dumping';
+        defaultOptionDumping.value = '';
+        dumpingSelect.appendChild(defaultOptionDumping);
+
+        for (var i = 1; i < data.length; i++) {
+            var option = document.createElement('option');
+            option.text = data[i].dumping;
+            option.value = data[i].dumping;
+            dumpingSelect.appendChild(option);
+            console.log(data[i].dumping);
+        }
+        // console.log(data[i].dumping);
+
+        if (jenisPengukuran === 'Rata Rata') {
+            tonaseInput.disabled = true;
+            tonaseInput.value = 0;
+        } else {
+            tonaseInput.disabled = false;
+        }
+    }
+};
 
         xhr.send();
     });
 </script>
+
 
 
 
