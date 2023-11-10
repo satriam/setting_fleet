@@ -1,8 +1,8 @@
 <?php
 $host = "localhost";
-$username = "u878982223_satriam";
-$password = "Sasat123#";
-$dbname = "u878982223_fleet";
+$username = "root";
+$password = "";
+$dbname = "dispatcher";
 
 $conn = mysqli_connect($host, $username, $password, $dbname);
 if (!$conn){
