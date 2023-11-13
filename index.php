@@ -19,15 +19,18 @@
      $Shift = null;
  }
 
-//  $tonase = mysqli_query($conn,"SELECT * FROM fleet_info ");
-//  if(mysqli_num_rows($tonase)>0){
-//     if ($row = mysqli_fetch_assoc($toko)) {
-//         $Tanggal = $row['Tanggal'];
-//         $Grup = $row['Grup'];
-//         $Shift = $row['Shift'];
+ $tonase = mysqli_query($conn,"SELECT tanggal, SUM(temporary.tonase) AS Total_Tonase FROM temporary where tanggal = '$Tanggal' && Grup = '$Grup' && Shift = '$Shift';");
+ 
+ if(mysqli_num_rows($tonase)>0){
+    if ($row = mysqli_fetch_assoc($tonase)) {
+        $tt = $row['Total_Tonase'];
+        // var_dump($tt);die;
+        
+    }
+ }
 
-//     }
-//  }
+
+  
 if(!empty($_POST['add_data'])){
     if(isset($_POST['DT']) && isset($_POST['loading']) && isset($_POST['dumping']) && isset($_POST['jarak']) && isset($_POST['jam'])&& isset($_POST['waktu'])){
         $unit = $_POST['DT'];
@@ -37,6 +40,10 @@ if(!empty($_POST['add_data'])){
         $tonase = $_POST['tonase'];
         $jam = $_POST['jam'];
         $waktu = $_POST['waktu'];
+        $exca = $_POST['exca'];
+        $bb = $_POST['bb'];
+        $ukur = $_POST['ukur'];
+        $status = $_POST['status'];
 
         // Periksa apakah kedua data sudah dipilih
         if (empty($unit) || empty($lp) || empty($dp)) {
@@ -61,7 +68,7 @@ if(!empty($_POST['add_data'])){
             //     </div>
             //     ";
             // }else{
-                mysqli_query($conn, "insert into temporary values('', '$Tanggal','$Shift','$Grup', '$unit','$tonase','$lp','$dp','$jarak','$jam','$waktu',NULL)")
+                mysqli_query($conn, "insert into temporary values('', '$Tanggal','$Shift','$Grup', '$unit','$tonase','$lp','$dp','$jarak','$bb','','','','''$jam','$waktu',NULL)")
                 or die(mysqli_error($conn));
                 
                 echo '<script>window.location="index.php"</script>';
@@ -92,19 +99,29 @@ if(!empty($_POST['add_data'])){
 
 //simpan info
 if(!empty($_POST['simpan_laporan'])){
-    mysqli_query($conn, "insert into temporary values('', '$Tanggal', '$unit','$tonase','$lp','$dp','$jarak',NULL)")
+    $cek = mysqli_query($conn, "SELECT * FROM laporan WHERE grup = '$Grup' AND shift = '$Shift' AND tanggal_shift ='$Tanggal'");
+    if (mysqli_num_rows($cek) > 0) {
+        // var_dump($cek);die;
+        echo "
+        <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+            <strong>NOOO!</strong> Data yang diinput sudah ada.
+            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                <span aria-hidden='true'>&times;</span>
+            </button>
+        </div>
+        ";
+    }else{
+    mysqli_query($conn, "insert into laporan values('','$Grup','$Shift','$tt','$Tanggal',NULL)")
     or die(mysqli_error($conn));
-    
-    echo '<script>window.location="index.php"</script>';
     echo "
-    <div class='alert alert-danger alert-dismissible fade show' role='alert'>
-        <strong>YESS!</strong> WKWKWKWKWK.
+    <div class='alert alert-success alert-dismissible fade show' role='alert'>
+        <strong>YESS!</strong> DATA BERHASIL TERSIMPAN.
         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
             <span aria-hidden='true'>&times;</span>
         </button>
     </div>
     ";
-
+    }
 }
 
 
@@ -126,10 +143,10 @@ if(!empty($_POST['simpan_laporan'])){
                                     <select name="DT" id="dt" class="form-control">
                                         <option disabled selected> Pilih </option>
                                         <?php
-                                        $query = mysqli_query($conn, "SELECT id_setting_dt,Nama_DT from setting_dt");
+                                        $query = mysqli_query($conn, "SELECT Nama_DT from setting_dt");
                                         while ($data = mysqli_fetch_array($query)) {
                                             ?>
-                                            <option value="<?=$data['id_setting_dt'];?>"><?php echo $data['Nama_DT'];?></option>
+                                            <option value="<?=$data['Nama_DT'];?>"><?php echo $data['Nama_DT'];?></option>
                                             <?php
                                         }
                                         ?>
@@ -169,6 +186,11 @@ if(!empty($_POST['simpan_laporan'])){
                                 <label><b>Waktu</b></label>
                                 <input type="number"  name="waktu" class="form-control" >
                             </div>
+                            <input type="text"  id="exca" name="exca" class="form-control" hidden>
+                            <input type="text"  id="bb" name="bb" class="form-control" hidden>
+                            <input type="text"  id="ukur" name="pengukuran" class="form-control"hidden >
+                            <input type="text"  id="status" name="status" class="form-control"  hidden>
+                            <input type="text"  id="lokasi" name="lokasi" class="form-control"  hidden>
                            
                             <div class="form-group col-md-6">
                                 <label><b>Tonase</b></label>
@@ -235,12 +257,12 @@ if(!empty($_POST['simpan_laporan'])){
                         <tbody>
                         <?php 
                         $no = 1;
-                        $data_barang = mysqli_query($conn,"select * from temporary inner join setting_dt on setting_dt.id_setting_dt = temporary.setting_dt where tanggal='$Tanggal'  order by id_temporary DESC");
+                        $data_barang = mysqli_query($conn,"select * from temporary where tanggal='$Tanggal'  order by id_temporary DESC");
                         while($d = mysqli_fetch_array($data_barang)){
                             ?>
                         <tr>
                             <td><?php echo $no++; ?></td> 
-                            <td><?php echo $d['Nama_DT']; ?></td> 
+                            <td><?php echo $d['setting_dt']; ?></td> 
                             <td><?php echo $d['loading_point']; ?></td>
                             <td><?php echo $d['dumping_point']; ?></td>
                             <td><?php echo $d['jarak']; ?></td>
@@ -256,6 +278,14 @@ if(!empty($_POST['simpan_laporan'])){
 						</tr>
                         <?php }?>
 					</tbody>
+                    <tfoot>
+                        <tr>
+                        <th colspan="5" class="text-right"><b>TOTAL TONASE :</b></th>
+                        <th><b><?php echo $tt ?></b></th>
+                        <th></th>
+                        <th></th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
             <form method="POST" class="d-flex justify-content-end">
@@ -304,23 +334,44 @@ if(!empty($_POST['simpan_laporan'])){
     var loadingSelect = document.getElementById('loading');
     var dumpingSelect = document.getElementById('dumping');
     var tonaseInput = document.getElementById('tonase');
+    var excas = document.getElementById('exca');
+    var bbs = document.getElementById('bb');
+    var ukurs= document.getElementById('ukur');
+    var statuss = document.getElementById('status');
+    var lokasis = document.getElementById('lokasi');
 
     // Tambahkan event listener untuk mengidentifikasi perubahan nilai pada elemen "dt"
     selectElement.addEventListener('change', function() {
         // Dapatkan nilai yang dipilih
         var selectedValue = selectElement.value;
+        var encodedValue = btoa(selectedValue);
+
+        console.log(encodedValue);
+        
 
         // Kirim permintaan ke server untuk mengambil data sesuai dengan nilai yang dipilih
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'get_data.php?nama_dt=' + selectedValue, true);
+        xhr.open('GET', 'get_data.php?nama_dt=' + encodedValue, true);
 
         xhr.onload = function () {
     if (xhr.status === 200) {
         // Parsing data yang diterima dari server
         var data = JSON.parse(xhr.responseText);
+        console.log(data);
+
 
         var jenisPengukuran = data[0].Pengukuran;
-        console.log(jenisPengukuran);
+        var exca = data[0].Exca;
+        var bb = data[0].Jenis_BB;
+        var lokasi = data[0].Lokasi;
+        var status = data[0].Status;
+        excas.value = exca;
+        bbs.value = bb;
+        ukurs.value = jenisPengukuran;
+        statuss.value = status;
+        lokasis.value = lokasi;
+      
+        
   
 
         // Mengisi elemen "loadingSelect" dengan opsi yang diterima
@@ -366,7 +417,15 @@ if(!empty($_POST['simpan_laporan'])){
 
         xhr.send();
     });
+
+
+    
 </script>
+<script>
+        $(document).ready(function () {
+            $('#exca, #bb, #ukur, #status').hide();
+        });
+    </script>
 
 
 
