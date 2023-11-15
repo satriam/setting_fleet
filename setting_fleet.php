@@ -40,9 +40,11 @@ if (isset($_POST['add_info'])) {
     if ($isUpdate) {
         // Lakukan proses update jika sudah ada data dalam database
         $query = mysqli_query($conn,"UPDATE fleet_info SET Tanggal = '$Tanggal', Grup = '$Grup', Shift = '$Shift'");
+        mysqli_query($conn,"DELETE from temporary");
     } else {
         // Lakukan proses insert jika data belum ada dalam database
         $query = mysqli_query($conn,"INSERT INTO fleet_info (Tanggal, Grup, Shift) VALUES ('$Tanggal', '$Grup', '$Shift')");
+        mysqli_query($conn,"DELETE from temporary");
     }
 
  

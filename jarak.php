@@ -42,7 +42,6 @@ if(!empty($_POST['add_jarak'])){
                             </div>
                         </div>
 
-                        <p>test</p>
                         <div class="form-group col-md-6">
                         <label><b>Nama Dumping</b></label>
                             <div class="form-select">   
