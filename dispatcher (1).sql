@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 13, 2023 at 09:32 AM
+-- Generation Time: Nov 15, 2023 at 09:35 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -28,15 +28,55 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `detail_input` (
-  `id` int(11) NOT NULL,
-  `id_input` varchar(100) NOT NULL,
-  `Exca` varchar(50) NOT NULL,
-  `Nama_loading` varchar(100) NOT NULL,
-  `Lokasi_dumping` varchar(100) NOT NULL,
-  `Jarak` int(20) NOT NULL,
-  `Jumlah_bb` int(20) NOT NULL,
-  `Tonase` int(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id_temporary` int(11) NOT NULL,
+  `tanggal` varchar(50) NOT NULL,
+  `shift` varchar(30) NOT NULL,
+  `grup` varchar(30) NOT NULL,
+  `setting_dt` varchar(100) NOT NULL,
+  `exca` varchar(100) NOT NULL,
+  `tonase` double NOT NULL,
+  `loading_point` varchar(150) NOT NULL,
+  `dumping_point` varchar(150) NOT NULL,
+  `jarak` varchar(100) NOT NULL,
+  `Jenis_BB` varchar(100) NOT NULL,
+  `Lokasi` varchar(100) NOT NULL,
+  `Pengukuran` varchar(100) NOT NULL,
+  `Status` varchar(100) NOT NULL,
+  `jam` time NOT NULL,
+  `waktu` int(11) NOT NULL,
+  `created` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `detail_input`
+--
+
+INSERT INTO `detail_input` (`id_temporary`, `tanggal`, `shift`, `grup`, `setting_dt`, `exca`, `tonase`, `loading_point`, `dumping_point`, `jarak`, `Jenis_BB`, `Lokasi`, `Pengukuran`, `Status`, `jam`, `waktu`, `created`) VALUES
+(2, '7 November 2023 07:07:49', '', '', '1', '', 22, 'Ts Aren', 'DH 4', '', '', '', '', '', '00:00:00', 0, '0000-00-00 00:00:00'),
+(3, '7 November 2023 07:07:49', '', '', '1', '', 22, 'Ts Aren', 'DH 4', '2 km', '', '', '', '', '00:00:00', 0, '0000-00-00 00:00:00'),
+(4, '7 November 2023 07:07:49', '', '', '1', '', 66, 'Ts Aren', 'DH 4', '2 km', '', '', '', '', '00:00:00', 0, '0000-00-00 00:00:00'),
+(5, '7 November 2023 07:07:49', '', '', '5', '', 40, 'Ts Merbau', 'DH 4', '20 km', '', '', '', '', '00:00:00', 0, '0000-00-00 00:00:00'),
+(6, '7 November 2023 07:07:49', '', '', '2', '', 44, 'Ts Merbau', 'DH 4', '20 km', '', '', '', '', '00:00:00', 0, '0000-00-00 00:00:00'),
+(7, '7 November 2023 07:07:49', '', '', '1', '', 90, 'Ts Merbau', 'DH 4', '20 km', '', '', '', '', '00:00:00', 0, '0000-00-00 00:00:00'),
+(8, '7 November 2023 03:09:54', '', '', '1', '', 33000, 'Ts Aren', 'DH 4', '2 km', '', '', '', '', '00:00:00', 0, '0000-00-00 00:00:00'),
+(9, '7 November 2023 03:09:54', '', '', '1', '', 22, 'Ts Merbau', 'DH 4', '20 km', '', '', '', '', '00:00:00', 0, '0000-00-00 00:00:00'),
+(10, '7 November 2023 03:09:54', '', '', '1', '', 23, 'Ts Merbau', 'DH 4', '20 km', '', '', '', '', '00:00:00', 0, '2023-11-08 03:08:41'),
+(11, '7 November 2023 03:09:54', '', '', '1', '', 23232, 'Ts Merbau', 'DH 4', '20 km', '', '', '', '', '00:00:00', 0, '2023-11-08 04:18:03'),
+(12, '7 November 2023 03:09:54', '', '', '1', '', 20000, 'Ts Merbau', 'DH 4', '20 km', '', '', '', '', '00:00:00', 0, '2023-11-08 03:27:03'),
+(13, '8 November 2023 03:12:26', '', '', '2', '', 232, 'Ts infit BWE', '1B', '', '', '', '', '', '00:00:00', 0, '2023-11-09 08:12:58'),
+(14, '8 November 2023 03:12:26', '', '', '1', '', 0, 'Ts Aren', 'DH 4', '2 km', '', '', '', '', '00:00:00', 0, '2023-11-09 01:43:55'),
+(15, '8 November 2023 03:12:26', '', '', '1', '', 0, 'Ts Aren', 'DH 4', '2 km', '', '', '', '', '00:00:00', 0, '2023-11-09 01:44:05'),
+(16, '8 November 2023 03:12:26', '', '', '1', '', 0, 'Ts Merbau', 'DH 4', '20 km', '', '', '', '', '00:00:00', 0, '2023-11-09 01:44:21'),
+(17, '8 November 2023 03:12:26', '', '', '5', '', 40, 'Ts Merbau', 'DH 4', '20 km', '', '', '', '', '00:00:00', 0, '2023-11-09 01:46:19'),
+(18, '8 November 2023 03:12:26', 'Shift 1', 'Grup C', '1', '', 300000, 'Ts Merbau', 'DH 4', '20 km', '', '', '', '', '08:54:00', 20, '2023-11-09 01:52:48'),
+(19, '9 November 2023 10:06:53', 'Shift 3', 'Grup B', 'DT01SGJ', 'Exca 04 SGJ', 30000, 'Ts Sungkai', '1B', '2 km', 'BB47', 'TAL', 'Timbangan', '', '12:08:00', 35, '2023-11-09 03:08:21'),
+(20, '9 November 2023 10:06:53', 'Shift 3', 'Grup B', 'DT01SGJ', 'Exca 04 SGJ', 0, 'Ts Sungkai', '1B', '2 km', 'BB47', 'TAL', 'Timbangan', '', '08:26:00', 10, '2023-11-13 01:22:06'),
+(21, '9 November 2023 10:06:53', 'Shift 3', 'Grup B', 'DT11SGJ', 'Exca 03 SGJ', 40000, 'Ts Aren', '1B', '2 km', 'BB47', 'TAL', 'Timbangan', '', '09:06:00', 15, '2023-11-13 02:03:39'),
+(22, '9 November 2023 10:06:53', 'Shift 3', 'Grup B', 'DT01SGJ', 'Exca 01 SGJ', 0, 'Ts Sungkai', '1B', '2 km', 'BB47', 'TAL', 'Timbangan', '', '10:14:00', 34, '2023-11-13 03:11:03'),
+(23, '9 November 2023 10:06:53', 'Shift 3', 'Grup B', 'DT11SGJ', 'Exca 01 SGJ', 30000, 'Ts Sungkai', '1B', '2 km', 'BB47', 'TAL', 'Timbangan', '', '00:00:00', 35, '2023-11-15 00:51:29'),
+(24, '9 November 2023 10:06:53', 'Shift 3', 'Grup B', 'DT11SGJ', 'Exca 01 SGJ', 20000, 'Ts Sungkai', '1B', '2 km', 'BB47', 'TAL', 'Timbangan', 'Antar Stock', '07:03:00', 30, '2023-11-15 01:00:09'),
+(25, '9 November 2023 10:06:53', 'Shift 3', 'Grup B', 'DT01SGJ', 'Exca 01 SGJ', 0, 'Ts Sungkai', '1B', '2 km', 'BB47', 'Banko', 'Rata Rata', 'Antar Stock', '08:05:00', 4, '2023-11-15 01:02:50'),
+(26, '15 November 2023 08:08:31', 'Shift 3', 'Grup A', 'DT01SGJ', 'Exca 01 SGJ', 0, 'Ts Sungkai', '1B', '2 km', 'BB47', 'Banko', 'Rata Rata', 'Antar Stock', '09:15:00', 2, '2023-11-15 02:57:20');
 
 -- --------------------------------------------------------
 
@@ -85,7 +125,7 @@ CREATE TABLE `fleet_info` (
 --
 
 INSERT INTO `fleet_info` (`id`, `Tanggal`, `Shift`, `Grup`) VALUES
-(8, '9 November 2023 10:06:53', 'Shift 3', 'Grup B');
+(8, '15 November 2023 08:08:31', 'Shift 3', 'Grup A');
 
 -- --------------------------------------------------------
 
@@ -132,7 +172,8 @@ CREATE TABLE `laporan` (
 --
 
 INSERT INTO `laporan` (`id_laporan`, `grup`, `shift`, `total_tonase`, `tanggal_shift`, `tanggal`) VALUES
-(8, 'Grup B', 'Shift 3', 70000, '9 November 2023 10:06:53', '2023-11-13 02:04:18');
+(9, 'Grup B', 'Shift 3', 70000, '9 November 2023 10:06:53', '2023-11-15 00:41:32'),
+(12, 'Grup A', 'Shift 3', 0, '15 November 2023 08:08:31', '2023-11-15 08:20:39');
 
 -- --------------------------------------------------------
 
@@ -253,33 +294,6 @@ CREATE TABLE `temporary` (
   `waktu` int(11) NOT NULL,
   `created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Dumping data for table `temporary`
---
-
-INSERT INTO `temporary` (`id_temporary`, `tanggal`, `shift`, `grup`, `setting_dt`, `tonase`, `loading_point`, `dumping_point`, `jarak`, `Jenis_BB`, `Lokasi`, `Pengukuran`, `Status`, `jam`, `waktu`, `created`) VALUES
-(2, '7 November 2023 07:07:49', '', '', '1', 22, 'Ts Aren', 'DH 4', '', '', '', '', '', '00:00:00', 0, '0000-00-00 00:00:00'),
-(3, '7 November 2023 07:07:49', '', '', '1', 22, 'Ts Aren', 'DH 4', '2 km', '', '', '', '', '00:00:00', 0, '0000-00-00 00:00:00'),
-(4, '7 November 2023 07:07:49', '', '', '1', 66, 'Ts Aren', 'DH 4', '2 km', '', '', '', '', '00:00:00', 0, '0000-00-00 00:00:00'),
-(5, '7 November 2023 07:07:49', '', '', '5', 40, 'Ts Merbau', 'DH 4', '20 km', '', '', '', '', '00:00:00', 0, '0000-00-00 00:00:00'),
-(6, '7 November 2023 07:07:49', '', '', '2', 44, 'Ts Merbau', 'DH 4', '20 km', '', '', '', '', '00:00:00', 0, '0000-00-00 00:00:00'),
-(7, '7 November 2023 07:07:49', '', '', '1', 90, 'Ts Merbau', 'DH 4', '20 km', '', '', '', '', '00:00:00', 0, '0000-00-00 00:00:00'),
-(8, '7 November 2023 03:09:54', '', '', '1', 33000, 'Ts Aren', 'DH 4', '2 km', '', '', '', '', '00:00:00', 0, '0000-00-00 00:00:00'),
-(9, '7 November 2023 03:09:54', '', '', '1', 22, 'Ts Merbau', 'DH 4', '20 km', '', '', '', '', '00:00:00', 0, '0000-00-00 00:00:00'),
-(10, '7 November 2023 03:09:54', '', '', '1', 23, 'Ts Merbau', 'DH 4', '20 km', '', '', '', '', '00:00:00', 0, '2023-11-08 03:08:41'),
-(11, '7 November 2023 03:09:54', '', '', '1', 23232, 'Ts Merbau', 'DH 4', '20 km', '', '', '', '', '00:00:00', 0, '2023-11-08 04:18:03'),
-(12, '7 November 2023 03:09:54', '', '', '1', 20000, 'Ts Merbau', 'DH 4', '20 km', '', '', '', '', '00:00:00', 0, '2023-11-08 03:27:03'),
-(13, '8 November 2023 03:12:26', '', '', '2', 232, 'Ts infit BWE', '1B', '', '', '', '', '', '00:00:00', 0, '2023-11-09 08:12:58'),
-(14, '8 November 2023 03:12:26', '', '', '1', 0, 'Ts Aren', 'DH 4', '2 km', '', '', '', '', '00:00:00', 0, '2023-11-09 01:43:55'),
-(15, '8 November 2023 03:12:26', '', '', '1', 0, 'Ts Aren', 'DH 4', '2 km', '', '', '', '', '00:00:00', 0, '2023-11-09 01:44:05'),
-(16, '8 November 2023 03:12:26', '', '', '1', 0, 'Ts Merbau', 'DH 4', '20 km', '', '', '', '', '00:00:00', 0, '2023-11-09 01:44:21'),
-(17, '8 November 2023 03:12:26', '', '', '5', 40, 'Ts Merbau', 'DH 4', '20 km', '', '', '', '', '00:00:00', 0, '2023-11-09 01:46:19'),
-(18, '8 November 2023 03:12:26', 'Shift 1', 'Grup C', '1', 300000, 'Ts Merbau', 'DH 4', '20 km', '', '', '', '', '08:54:00', 20, '2023-11-09 01:52:48'),
-(19, '9 November 2023 10:06:53', 'Shift 3', 'Grup B', '8', 30000, 'Ts Sungkai', '1B', '2 km', '', '', '', '', '12:08:00', 35, '2023-11-09 03:08:21'),
-(20, '9 November 2023 10:06:53', 'Shift 3', 'Grup B', '8', 0, 'Ts Sungkai', '1B', '2 km', '', '', '', '', '08:26:00', 10, '2023-11-13 01:22:06'),
-(21, '9 November 2023 10:06:53', 'Shift 3', 'Grup B', '11', 40000, 'Ts Sungkai', '1B', '2 km', '', '', '', '', '09:06:00', 15, '2023-11-13 02:03:39'),
-(22, '9 November 2023 10:06:53', 'Shift 3', 'Grup B', 'DT01SGJ', 0, 'Ts Sungkai', '1B', '2 km', '', '', '', '', '10:14:00', 34, '2023-11-13 03:11:03');
 
 -- --------------------------------------------------------
 
@@ -484,7 +498,7 @@ INSERT INTO `unit_exca` (`id_unit`, `unit`, `mitra`) VALUES
 -- Indexes for table `detail_input`
 --
 ALTER TABLE `detail_input`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_temporary`);
 
 --
 -- Indexes for table `dumping`
@@ -556,7 +570,7 @@ ALTER TABLE `unit_exca`
 -- AUTO_INCREMENT for table `detail_input`
 --
 ALTER TABLE `detail_input`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_temporary` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `dumping`
@@ -580,7 +594,7 @@ ALTER TABLE `jarak`
 -- AUTO_INCREMENT for table `laporan`
 --
 ALTER TABLE `laporan`
-  MODIFY `id_laporan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_laporan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `loading`
@@ -604,7 +618,7 @@ ALTER TABLE `setting_fleet`
 -- AUTO_INCREMENT for table `temporary`
 --
 ALTER TABLE `temporary`
-  MODIFY `id_temporary` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_temporary` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `unit_dt`
