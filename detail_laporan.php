@@ -24,7 +24,7 @@ $ukur = mysqli_query($conn, "SELECT DISTINCT Pengukuran FROM detail_input where 
 //Exca
 $Exca = mysqli_query($conn,"SELECT DISTINCT Exca, SUM(tonase) AS Total_Tonase FROM detail_input WHERE tanggal = '$tanggal' AND shift = '$shift' AND grup = '$grup' GROUP BY Exca;");
 //Loc Exca
-$Excaloc = mysqli_query($conn,"SELECT DISTINCT Lokasi FROM detail_input WHERE ");
+$Excaloc = mysqli_query($conn,"SELECT DISTINCT Lokasi FROM detail_input WHERE tanggal = '$tanggal' AND shift = '$shift' AND grup = '$grup' ");
 //DT
 $Dump= mysqli_query($conn,"SELECT DISTINCT setting_dt, SUM(tonase) AS Total_Tonase FROM detail_input WHERE tanggal = '$tanggal' AND shift = '$shift' AND grup = '$grup' GROUP BY setting_dt;");
 ?>
