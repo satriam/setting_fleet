@@ -38,10 +38,7 @@
                          
                             <td>
                             <a class="btn btn-primary btn-xs" href="detail_laporan.php?id=<?php echo $d['id_laporan']; ?>">
-                                <i class="fa fa-pen fa-xs"></i> Edit</a>
-                            <a class="btn btn-danger btn-xs" href="?id=<?php echo $d['id_laporan']; ?>" 
-                                onclick="javascript:return confirm('Hapus Data Barang ?');">
-                                <i class="fa fa-trash fa-xs"></i> Hapus</a>
+                                <i class="fa fa-pen fa-xs"></i> detail</a>
                             </td>
 						</tr>
                         <?php }?>
@@ -55,13 +52,5 @@
 
     </div><!-- end row col-md-9 -->
   </div>
-  <?php 
-	include 'config.php';
-	if(!empty($_GET['id'])){
-		$id= $_GET['id'];
-		$hapus_data = mysqli_query($conn, "DELETE FROM laporanku WHERE id_cart ='$id'");
-		echo '<script>window.location="laporan.php"</script>';
-	}
 
-?>
 <?php include 'template/footer.php';?>

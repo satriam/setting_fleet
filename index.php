@@ -42,8 +42,9 @@ if(!empty($_POST['add_data'])){
         $waktu = $_POST['waktu'];
         $exca = $_POST['exca'];
         $bb = $_POST['bb'];
-        $ukur = $_POST['ukur'];
+        $ukur = $_POST['pengukuran'];
         $status = $_POST['status'];
+        $lokasi = $_POST['lokasi'];                     
 
         // Periksa apakah kedua data sudah dipilih
         if (empty($unit) || empty($lp) || empty($dp)) {
@@ -68,8 +69,11 @@ if(!empty($_POST['add_data'])){
             //     </div>
             //     ";
             // }else{
-                mysqli_query($conn, "insert into temporary values('', '$Tanggal','$Shift','$Grup', '$unit','$tonase','$lp','$dp','$jarak','$bb','','','','''$jam','$waktu',NULL)")
+                mysqli_query($conn, "insert into temporary values('', '$Tanggal','$Shift','$Grup', '$unit','$tonase','$lp','$dp','$jarak','$bb','$lokasi','$ukur','$status','$jam','$waktu',NULL)")
                 or die(mysqli_error($conn));
+                mysqli_query($conn, "insert into detail_input values('', '$Tanggal','$Shift','$Grup', '$unit','$exca','$tonase','$lp','$dp','$jarak','$bb','$lokasi','$ukur','$status','$jam','$waktu',NULL)")
+                or die(mysqli_error($conn));
+          
                 
                 echo '<script>window.location="index.php"</script>';
                 echo "
@@ -100,28 +104,43 @@ if(!empty($_POST['add_data'])){
 //simpan info
 if(!empty($_POST['simpan_laporan'])){
     $cek = mysqli_query($conn, "SELECT * FROM laporan WHERE grup = '$Grup' AND shift = '$Shift' AND tanggal_shift ='$Tanggal'");
+    $cek2 = mysqli_query($conn, "SELECT * FROM temporary");
     if (mysqli_num_rows($cek) > 0) {
         // var_dump($cek);die;
         echo "
         <div class='alert alert-danger alert-dismissible fade show' role='alert'>
-            <strong>NOOO!</strong> Data yang diinput sudah ada.
+            <strong>NOOO!</strong> Data yang diinput Shift saat ini sudah ada.
             <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                 <span aria-hidden='true'>&times;</span>
             </button>
         </div>
         ";
     }else{
-    mysqli_query($conn, "insert into laporan values('','$Grup','$Shift','$tt','$Tanggal',NULL)")
-    or die(mysqli_error($conn));
-    echo "
-    <div class='alert alert-success alert-dismissible fade show' role='alert'>
-        <strong>YESS!</strong> DATA BERHASIL TERSIMPAN.
-        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-            <span aria-hidden='true'>&times;</span>
-        </button>
-    </div>
-    ";
+        if(mysqli_num_rows($cek2)>0){
+            mysqli_query($conn, "insert into laporan values('','$Grup','$Shift','$tt','$Tanggal',NULL)")
+            or die(mysqli_error($conn));
+        
+            mysqli_query($conn, "DELETE FROM temporary")
+            or die(mysqli_error($conn));
+            echo "
+            <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                <strong>YESS!</strong> DATA BERHASIL TERSIMPAN.
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                    <span aria-hidden='true'>&times;</span>
+                </button>
+            </div>
+            ";
+        }else{
+            echo "
+            <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                <strong>NOO!</strong> DATA KOSONG!.
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                    <span aria-hidden='true'>&times;</span>
+                </button>
+            </div>
+            ";
     }
+}
 }
 
 
@@ -259,6 +278,10 @@ if(!empty($_POST['simpan_laporan'])){
                         $no = 1;
                         $data_barang = mysqli_query($conn,"select * from temporary where tanggal='$Tanggal'  order by id_temporary DESC");
                         while($d = mysqli_fetch_array($data_barang)){
+                            $timestamp_diff = time() - strtotime($d['created']);
+    
+                            // Check if the data is more than half a day old (43200 seconds = 12 hours)
+                            $is_old_data = $timestamp_diff > 43200;
                             ?>
                         <tr>
                             <td><?php echo $no++; ?></td> 
@@ -269,11 +292,26 @@ if(!empty($_POST['simpan_laporan'])){
                             <td><?php echo $d['tonase']; ?></td>
                             <td><?php echo $d['created']; ?></td>
                             <td>
-                                <a class="btn btn-primary btn-xs" href="edit_jarak.php?id=<?php echo $d['id_temporary']; ?>">
-                                <i class="fa fa-pen fa-xs"></i> Edit</a>
+                               
+
+                                <?php
+                                    // Only allow deletion if the data is not more than half a day old
+                                    if (!$is_old_data) {
+                                        ?>
+                                        <a class="btn btn-primary btn-xs" href="edit_jarak.php?id=<?php echo $d['id_temporary']; ?>">
+                                        <i class="fa fa-pen fa-xs"></i> Edit</a>
+
+                                        <a class="btn btn-danger btn-xs" href="?id=<?php echo $d['id_temporary']; ?>"
+                                        onclick="javascript:return confirm('Hapus Data Jarak ?');">
+                                            <i class="fa fa-trash fa-xs"></i> Hapus
+                                        </a>
+                                        <?php
+                                    }
+                                    ?>
+<!-- 
                                 <a class="btn btn-danger btn-xs" href="?id=<?php echo $d['id_temporary']; ?>" 
                                 onclick="javascript:return confirm('Hapus Data Jarak ?');">
-                                <i class="fa fa-trash fa-xs"></i> Hapus</a>
+                                <i class="fa fa-trash fa-xs"></i> Hapus</a> -->
                             </td>
 						</tr>
                         <?php }?>
