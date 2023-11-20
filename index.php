@@ -444,7 +444,7 @@ if(!empty($_POST['simpan_laporan'])){
         }
         // console.log(data[i].dumping);
 
-        if (jenisPengukuran === 'Rata Rata') {
+        if (jenisPengukuran === 'Bypass') {
             tonaseInput.disabled = true;
             tonaseInput.value = 0;
         } else {

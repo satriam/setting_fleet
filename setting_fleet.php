@@ -253,7 +253,7 @@ if (isset($_POST['add_info'])) {
                         <label><b>Pengukuran</b></label>
                             <select name="Pengukuran"  class="form-control" >
                             <option disabled selected> Pilih </option>
-                                <option value="Rata Rata">Rata Rata</option>
+                                <option value="bypass">Bypass</option>
                                 <option value="Belt Scale">Belt Scale</option>
                                 <option value="Timbangan">Timbangan</option>
                             </select>

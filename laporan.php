@@ -37,7 +37,9 @@
                             <td><?php echo $d['tanggal']; ?></td>
                          
                             <td>
-                            <a class="btn btn-primary btn-xs" href="detail_laporan.php?id=<?php echo $d['id_laporan']; ?>">
+                            <!-- <a class="btn btn-primary btn-xs" href="detail_laporan.php?id=<?php echo $d['id_laporan']; ?>">
+                                <i class="fa fa-pen fa-xs"></i> detail</a> -->
+                            <a class="btn btn-primary btn-xs" onclick="viewDetail(<?php echo $d['id_laporan']; ?>)">
                                 <i class="fa fa-pen fa-xs"></i> detail</a>
                             </td>
 						</tr>
@@ -52,5 +54,27 @@
 
     </div><!-- end row col-md-9 -->
   </div>
+
+  <script>
+    function viewDetail(id) {
+        // Create a form element
+        var form = document.createElement('form');
+        form.action = 'detail_laporan.php';
+        form.method = 'post';
+
+        // Create a hidden input field for the id
+        var hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = 'id';
+        hiddenInput.value = id;
+
+        // Append the hidden input to the form
+        form.appendChild(hiddenInput);
+
+        // Append the form to the document body and submit it
+        document.body.appendChild(form);
+        form.submit();
+    }
+</script>
 
 <?php include 'template/footer.php';?>

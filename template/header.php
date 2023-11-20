@@ -1,5 +1,5 @@
-<!-- By : Adgrafika -->
-<!-- Di Larang Memperjual Source Code ini -->
+<!-- By : SATRIA MULYA ADIWARDANA -->
+<!-- HAK CIPTA BOSKU -->
 <?php
 include "config.php";
 ?>
@@ -18,6 +18,8 @@ include "config.php";
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+<!-- Bootstrap CSS -->
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 
   
  
@@ -52,6 +54,13 @@ button.buttons-html5{
 </head>
 <body>
 
+
+       
+
+
+
+
+<div id="unlockedContent">
 <nav class="navbar navbar-expand-lg navbar-dark bg-purple text-white shadow-sm sticky-top d-md-none d-lg-none d-xl-none">
   <a class="navbar-brand" href="https://www.youtube.com/channel/UCyHwOyTkQBgwfWMOrblSUDg"><i class="fa fa-truck mr-1">REHANDLING BUKIT ASAM</i><b>
  </b></a>
@@ -60,17 +69,23 @@ button.buttons-html5{
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link putih" href="index.php"><i class="fa fa-desktop mr-2"></i>Kasir</a>
+                     <li class="nav-item">
+                        <a class="nav-link putih" href="index.php"><i class="fa fa-desktop text-purple mr-2"></i>Dispatch</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link putih" href="setting_fleet.php"><i class="fa fa-shopping-bag mr-2"></i>Setting Fleet</a>
+                        <a class="nav-link putih" href="setting_fleet.php"><i class="fa fa-shopping-bag text-purple  mr-2"></i>Setting Fleet</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link putih" href="unit.php"><i class="fa fa-shopping-bag mr-2"></i>Unit</a>
+                        <a class="nav-link putih"  href="setting_dt.php"><i class="fa fa-shopping-bag text-purple  mr-2"></i>Setting Dump Truck</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link putih" href="laporan.php"><i class="fa fa-table mr-2"></i>Laporan</a>
+                        <a class="nav-link putih"  href="unit.php"><i class="fa fa-shopping-bag text-purple mr-2"></i>Unit</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link putih"  href="jarak.php"><i class="fa fa-table text-purple mr-2"></i>Jarak</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link putih"  href="laporan.php"><i class="fa fa-table text-purple mr-2"></i>Laporan</a>
                     </li>
                     <!-- <li class="nav-item">
                         <a class="nav-link putih" href="pengaturan.php"><i class="fa fa-cog mr-2"></i>Pengaturan</a>
@@ -127,3 +142,4 @@ button.buttons-html5{
          </div>
     </div>
   </div>
+

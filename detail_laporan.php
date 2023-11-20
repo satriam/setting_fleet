@@ -1,6 +1,6 @@
 <?php include 'template/header.php';?>
 <?php
-$id = $_GET['id'];
+$id = $_POST['id'];
 $result = mysqli_query($conn, "SELECT * FROM laporan WHERE id_laporan=$id");
 
 while($data = mysqli_fetch_array($result))
@@ -12,7 +12,7 @@ while($data = mysqli_fetch_array($result))
 }
 
 //loading
-$loading = mysqli_query($conn, "SELECT DISTINCT loading_point FROM detail_input where tanggal='$tanggal' AND shift='$shift' AND grup='$grup';");
+$loading = mysqli_query($conn, "SELECT DISTINCT loading_point, COUNT(DISTINCT exca) AS jumlah_exca FROM detail_input where tanggal='$tanggal' AND shift='$shift' AND grup='$grup' GROUP BY loading_point;");
 //dumping
 $dumping = mysqli_query($conn, "SELECT DISTINCT dumping_point FROM detail_input where tanggal='$tanggal' AND shift='$shift' AND grup='$grup';");
 //bb
@@ -22,7 +22,9 @@ $loc = mysqli_query($conn, "SELECT DISTINCT Lokasi FROM detail_input where tangg
 //ukur
 $ukur = mysqli_query($conn, "SELECT DISTINCT Pengukuran FROM detail_input where tanggal='$tanggal' AND shift='$shift' AND grup='$grup';");
 //Exca
-$Exca = mysqli_query($conn,"SELECT DISTINCT Exca, SUM(tonase) AS Total_Tonase FROM detail_input WHERE tanggal = '$tanggal' AND shift = '$shift' AND grup = '$grup' GROUP BY Exca;");
+$Exca = mysqli_query($conn,"SELECT DISTINCT Exca, SUM(tonase) AS Total_Tonase ,COUNT(setting_dt) as total_dt FROM detail_input WHERE tanggal = '$tanggal' AND shift = '$shift' AND grup = '$grup' GROUP BY Exca;");
+//Exca ukur
+
 //Loc Exca
 $Excaloc = mysqli_query($conn,"SELECT DISTINCT Lokasi FROM detail_input WHERE ");
 //DT
@@ -69,7 +71,8 @@ $Dump= mysqli_query($conn,"SELECT DISTINCT setting_dt, SUM(tonase) AS Total_Tona
                 <td style="padding-left: 10px;"><?php
                     while ($row = mysqli_fetch_assoc($loading)) {
                         $loadingPoint = $row['loading_point'];
-                        echo "<li>$loadingPoint</li>";
+                        $exca = $row['jumlah_exca'];
+                        echo "<li>$loadingPoint ($exca fleet)</li>";
                     }
                     ?></td>
                 </tr>
@@ -127,7 +130,8 @@ $Dump= mysqli_query($conn,"SELECT DISTINCT setting_dt, SUM(tonase) AS Total_Tona
     <?php 
     while ($row = mysqli_fetch_assoc($Exca)) {
         $excaValue = $row['Exca'];
-        $total = $row['Total_Tonase']
+        $total = $row['Total_Tonase'];
+        $rit = $row['total_dt'];
     ?>
     <div class="row">
         <!-- Exca -->
@@ -145,7 +149,43 @@ $Dump= mysqli_query($conn,"SELECT DISTINCT setting_dt, SUM(tonase) AS Total_Tona
                             <td>:</td>
                             <td style="padding-left: 10px;"><?php echo $total?></td>
                         </tr>
-
+                        <tr style="border-bottom:1px dashed">
+                            <td><b>Total Ritase</b></td>
+                            <td>:</td>
+                            <td style="padding-left: 10px;"><?php echo $rit?></td>
+                        </tr>
+                        <?php 
+                        $ExcaUkur=mysqli_query($conn,"SELECT
+                        Exca,
+                        SUM(CASE WHEN Pengukuran = 'timbangan' THEN 1 ELSE 0 END) AS Jumlah_DT_Timbangan,
+                        SUM(CASE WHEN Pengukuran = 'rata rata' THEN 1 ELSE 0 END) AS Jumlah_DT_Bypass,
+                        SUM(CASE WHEN Pengukuran = 'beltscale' THEN 1 ELSE 0 END) AS Jumlah_DT_Beltscale
+                    FROM detail_input
+                    WHERE tanggal = '$tanggal' AND shift = '$shift' AND grup = '$grup' AND Exca = '$excaValue'
+                    GROUP BY Exca;");
+                            while ($row = mysqli_fetch_assoc($ExcaUkur)) {
+                                $bypass = $row['Jumlah_DT_Bypass'];
+                                $timbang = $row['Jumlah_DT_Timbangan'];
+                                $belt = $row['Jumlah_DT_Beltscale'];
+                            ?>
+                        <tr style="border-bottom:1px dashed">
+                            <td><b>Ritase Pengukuran Bypass</b></td>
+                            <td>:</td>
+                            <td style="padding-left: 10px;"><?php echo $bypass?></td>
+                        </tr>
+                        <tr style="border-bottom:1px dashed">
+                            <td><b>Ritase Pengukuran Timbangan</b></td>
+                            <td>:</td>
+                            <td style="padding-left: 10px;"><?php echo $timbang?></td>
+                        </tr>
+                        <tr style="border-bottom:1px dashed">
+                            <td><b>Ritase Pengukuran BeltScale</b></td>
+                            <td>:</td>
+                            <td style="padding-left: 10px;"><?php echo $belt?></td>
+                        </tr>
+                        <?php
+                            }
+                            ?>
                         <tr style="border-bottom:1px dashed">
                         <td><b>Dump Truck Active</b></td>
                         <td>:</td>
@@ -167,6 +207,18 @@ $Dump= mysqli_query($conn,"SELECT DISTINCT setting_dt, SUM(tonase) AS Total_Tona
                             while ($row = mysqli_fetch_assoc($Excaloc)) {
                                 $setexca = $row['Lokasi'];
                                 echo "<li>$setexca</li>";
+                            }
+                            ?></td>
+                        </tr>
+
+                        <tr style="border-bottom:1px dashed">
+                        <td><b>Loading Point Active</b></td>
+                        <td>:</td>
+                        <td style="padding-left: 10px;"><?php
+                        $Excaloc = mysqli_query($conn, "SELECT DISTINCT Loading_point FROM detail_input WHERE Exca = '$excaValue' AND tanggal='$tanggal' AND shift='$shift' AND grup='$grup'");
+                            while ($row = mysqli_fetch_assoc($Excaloc)) {
+                                $loading = $row['Loading_point'];
+                                echo "<li>$loading</li>";
                             }
                             ?></td>
                         </tr>
@@ -261,7 +313,7 @@ while ($row = mysqli_fetch_assoc($Dump)) {
                 </tr>
             </table>
             <br>
-            <table class="table table-striped table-bordered table-sm dt-responsive nowrap" width="100%">
+            <table class="table table-striped table-bordered table-sm dt-responsive tabell-data" width="100%">
                         <thead class="thead-purple">
                             <tr>
                             <th>No</th>
@@ -304,10 +356,4 @@ while ($row = mysqli_fetch_assoc($Dump)) {
 </div>
 <?php }
 ?>
-
-
-
-
-
-  
 <?php include 'template/footer.php';?>
