@@ -44,7 +44,7 @@
 
 
 <!-- Locked Content -->
-<div class="container d-flex justify-content-center align-items-center min-vh-100" id="lockedMessage">
+<div class="container  justify-content-center align-items-center min-vh-100" id="lockedMessage">
     <h1 class="text-center">P BALAP!</h1>
 </div>
     <script src="assets/js/jquery.slim.min.js"></script>
@@ -105,11 +105,13 @@ document.addEventListener('DOMContentLoaded', function () {
     function showLockedContent() {
         unlockedContent.classList.add('d-none');
         lockedMessage.classList.remove('d-none'); // Show the locked message
+        lockedMessage.classList.add('d-flex');
     }
 
     // Function to hide locked content
     function hideLockedContent() {
         lockedMessage.classList.add('d-none'); // Hide the locked message
+        lockedMessage.classList.remove('d-flex');
     }
 
     // Function to show unlocked content and hide locked content

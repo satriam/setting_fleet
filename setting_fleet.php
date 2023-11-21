@@ -58,7 +58,7 @@ if (isset($_POST['add_info'])) {
     <div class="col-md-12 mb-3">
         <div class="card">
         <div class="card-header bg-purple">
-                <div class="card-tittle text-white"><i class="fa fa-shopping-cart"></i> <b>Tambah Setting Fleet</b></div>
+                <div class="card-tittle text-white"><i class="fa fa-plus-square"></i> <b>Tambah Setting Fleet</b></div>
             </div>
             <div class="card-body">
                 <form method="POST">
