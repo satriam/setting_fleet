@@ -64,7 +64,7 @@ if(!empty($_POST['add_barang'])){
 ?>
         <div class="card">
         <div class="card-header bg-purple">
-                <div class="card-tittle text-white"><i class="fa fa-shopping-cart"></i> <b>Setting DT</b></div>
+                <div class="card-tittle text-white"><i class="fa fa-plus-square"></i> <b>Setting DT</b></div>
             </div>
             <div class="card-body">
                 <form method="POST">

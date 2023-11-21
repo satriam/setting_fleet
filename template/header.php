@@ -18,6 +18,7 @@ include "config.php";
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"> -->
 <!-- Bootstrap CSS -->
 <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 
@@ -69,23 +70,23 @@ button.buttons-html5{
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
-                     <li class="nav-item">
-                        <a class="nav-link putih" href="index.php"><i class="fa fa-desktop text-purple mr-2"></i>Dispatch</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php"><i class="fa fa-desktop text-purple mr-2"></i>Dispatch</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link putih" href="setting_fleet.php"><i class="fa fa-shopping-bag text-purple  mr-2"></i>Setting Fleet</a>
+                        <a class="nav-link" href="setting_fleet.php"><i class="fa fa-tasks text-purple mr-2" aria-hidden="true"></i>Setting Fleet</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link putih"  href="setting_dt.php"><i class="fa fa-shopping-bag text-purple  mr-2"></i>Setting Dump Truck</a>
+                        <a class="nav-link" href="setting_dt.php"><i class="fa fa-tasks text-purple mr-2" aria-hidden="true"></i>Setting Dump Truck</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link putih"  href="unit.php"><i class="fa fa-shopping-bag text-purple mr-2"></i>Unit</a>
+                        <a class="nav-link" href="unit.php"><i class="fa fa-car text-purple mr-2" aria-hidden="true"></i>Unit</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link putih"  href="jarak.php"><i class="fa fa-table text-purple mr-2"></i>Jarak</a>
+                        <a class="nav-link" href="jarak.php"><i class="fa fa-location-arrow text-purple mr-2"></i>Jarak</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link putih"  href="laporan.php"><i class="fa fa-table text-purple mr-2"></i>Laporan</a>
+                        <a class="nav-link" href="laporan.php"><i class="fa fa-table text-purple mr-2"></i>Laporan</a>
                     </li>
                     <!-- <li class="nav-item">
                         <a class="nav-link putih" href="pengaturan.php"><i class="fa fa-cog mr-2"></i>Pengaturan</a>
@@ -118,16 +119,16 @@ button.buttons-html5{
                         <a class="nav-link" href="index.php"><i class="fa fa-desktop text-purple mr-2"></i>Dispatch</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="setting_fleet.php"><i class="fa fa-shopping-bag text-purple  mr-2"></i>Setting Fleet</a>
+                        <a class="nav-link" href="setting_fleet.php"><i class="fa fa-tasks text-purple mr-2" aria-hidden="true"></i>Setting Fleet</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="setting_dt.php"><i class="fa fa-shopping-bag text-purple  mr-2"></i>Setting Dump Truck</a>
+                        <a class="nav-link" href="setting_dt.php"><i class="fa fa-tasks text-purple mr-2" aria-hidden="true"></i>Setting Dump Truck</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="unit.php"><i class="fa fa-shopping-bag text-purple mr-2"></i>Unit</a>
+                        <a class="nav-link" href="unit.php"><i class="fa fa-car text-purple mr-2" aria-hidden="true"></i>Unit</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="jarak.php"><i class="fa fa-table text-purple mr-2"></i>Jarak</a>
+                        <a class="nav-link" href="jarak.php"><i class="fa fa-location-arrow text-purple mr-2"></i>Jarak</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="laporan.php"><i class="fa fa-table text-purple mr-2"></i>Laporan</a>
