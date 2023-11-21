@@ -313,7 +313,7 @@ while ($row = mysqli_fetch_assoc($Dump)) {
                 </tr>
             </table>
             <br>
-            <table class="table table-striped table-bordered table-sm dt-responsive nowrap" width="100%">
+            <table class="table table-striped table-bordered table-sm dt-responsive nowrap tabell-data" width="100%">
                         <thead class="thead-purple">
                             <tr>
                             <th>No</th>
