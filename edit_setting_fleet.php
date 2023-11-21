@@ -11,9 +11,16 @@ include "config.php";
 if(isset($_POST['update']))
 {
     $id = $_POST['id'];
-    $nama = $_POST['unit'];
-    $mitra = $_POST['mitra'];
-
+    $exca = $data['Exca'];
+    $loading = $data['Nama_loading'];
+    $lp1 = $data['Loading_pengalihan_1'];
+    $lp2 = $data['Loading_pengalihan_2'];
+    $lp3 = $data['Loading_pengalihan_3'];
+    $dumping = $data['Nama_dumping'];
+    $dp1 = $data['Dumping_pengalihan_1'];
+    $dp2 = $data['Dumping_pengalihan_1'];
+    $dp3 = $data['Dumping_pengalihan_1'];
+    $bb = $data['Jenis_BB'];
     $result = mysqli_query($conn, "UPDATE unit SET unit='$nama',mitra='$mitra' WHERE id_unit=$id");
     if(!$result){
         echo "
@@ -56,6 +63,7 @@ if(isset($_POST['update']))
 ?>
 <?php
 $id = $_GET['id'];
+// var_dump($id);die;
 $result = mysqli_query($conn, "SELECT * FROM setting_fleet WHERE Id_setting=$id");
 // var_dump($result);die;
 while($data = mysqli_fetch_array($result))
@@ -72,6 +80,8 @@ while($data = mysqli_fetch_array($result))
     $dp2 = $data['Dumping_pengalihan_1'];
     $dp3 = $data['Dumping_pengalihan_1'];
     $bb = $data['Jenis_BB'];
+    $ukuran = $data['Pengukuran'];
+    $status = $data['Status'];
 }
 ?>
         <div class="card">
@@ -84,13 +94,18 @@ while($data = mysqli_fetch_array($result))
                 <form method="POST">
                     <div class="form-row">
                     <input type="hidden" name="id" value="<?php echo $_GET['id'] ?>">
-                        <div class="form-group col-md-6">
+                    <div class="form-group col-md-6">
                             <label><b>Lokasi</b></label>
-                            <select name="Lokasi"  class="form-control">
-                                <option value="Banko">Banko</option>
-                                <option value="TAL">TAL</option>
-                                <option value="MTB">MTB</option>
-                                <option value="MTBU">MTBU </option>
+                            <select name="Lokasi" class="form-control">
+                                <?php
+                                $lokasiOptions = array("Banko", "TAL", "MTB", "MTBU");
+                                foreach ($lokasiOptions as $option) {
+                                    $selected = ($option == $lokasi) ? 'selected' : '';
+                                ?>
+                                    <option value="<?= $option; ?>" <?= $selected; ?>><?php echo $option; ?></option>
+                                <?php
+                                }
+                                ?>
                             </select>
                         </div>
 
@@ -99,10 +114,11 @@ while($data = mysqli_fetch_array($result))
                             <select name="Exca"  class="form-control">
                             <option disabled selected> Pilih </option>
                                     <?php
-                                    $query    =mysqli_query($conn, "SELECT * FROM unit");
+                                    $query    =mysqli_query($conn, "SELECT * FROM unit_exca");
                                     while ($data = mysqli_fetch_array($query)) {
+                                        $selected = ($data['unit'] == $exca) ? 'selected' : '';
                                     ?>
-                                    <option value="<?=$data['unit'];?>"><?php echo $data['unit'];?></option>
+                                    <option value="<?=$data['unit'];?>"<?= $selected; ?>><?php echo $data['unit'];?></option>
                                     <?php
                                     }
                                     ?>
@@ -116,8 +132,9 @@ while($data = mysqli_fetch_array($result))
                                     <?php
                                     $query    =mysqli_query($conn, "SELECT * FROM loading");
                                     while ($data = mysqli_fetch_array($query)) {
+                                        $selected = ($data['Nama_loading'] == $loading) ? 'selected' : '';
                                     ?>
-                                    <option value="<?=$data['Nama_loading'];?>"><?php echo $data['Nama_loading'];?></option>
+                                    <option value="<?=$data['Nama_loading'];?>"<?= $selected; ?>><?php echo $data['Nama_loading'];?></option>
                                     <?php
                                     }
                                     ?>
@@ -131,8 +148,9 @@ while($data = mysqli_fetch_array($result))
                                     <?php
                                     $query    =mysqli_query($conn, "SELECT * FROM loading");
                                     while ($data = mysqli_fetch_array($query)) {
+                                        $selected = ($data['Nama_loading'] == $lp1) ? 'selected' : '';
                                     ?>
-                                    <option value="<?=$data['Nama_loading'];?>"><?php echo $data['Nama_loading'];?></option>
+                                    <option value="<?=$data['Nama_loading'];?>"<?= $selected; ?>><?php echo $data['Nama_loading'];?></option>
                                     <?php
                                     }
                                     ?>
@@ -146,8 +164,9 @@ while($data = mysqli_fetch_array($result))
                                     <?php
                                     $query    =mysqli_query($conn, "SELECT * FROM loading");
                                     while ($data = mysqli_fetch_array($query)) {
+                                        $selected = ($data['Nama_loading'] == $lp2) ? 'selected' : '';
                                     ?>
-                                    <option value="<?=$data['Nama_loading'];?>"><?php echo $data['Nama_loading'];?></option>
+                                    <option value="<?=$data['Nama_loading'];?>"<?= $selected; ?>><?php echo $data['Nama_loading'];?></option>
                                     <?php
                                     }
                                     ?>
@@ -161,8 +180,9 @@ while($data = mysqli_fetch_array($result))
                                     <?php
                                     $query    =mysqli_query($conn, "SELECT * FROM loading");
                                     while ($data = mysqli_fetch_array($query)) {
+                                        $selected = ($data['Nama_loading'] == $lp3) ? 'selected' : '';
                                     ?>
-                                    <option value="<?=$data['Nama_loading'];?>"><?php echo $data['Nama_loading'];?></option>
+                                    <option value="<?=$data['Nama_loading'];?>"<?= $selected; ?>><?php echo $data['Nama_loading'];?></option>
                                     <?php
                                     }
                                     ?>
@@ -171,13 +191,14 @@ while($data = mysqli_fetch_array($result))
 
                         <div class="form-group col-md-6">
                             <label><b>Lokasi Dumping</b></label>
-                            <select name="Dumping" id="select" class="form-control">
+                            <select name="Dumping" class="form-control">
                             <option disabled selected> Pilih </option>
                                     <?php
                                     $query    =mysqli_query($conn, "SELECT * FROM dumping");
                                     while ($data = mysqli_fetch_array($query)) {
+                                        $selected = ($data['Nama_dumping'] == $dumping) ? 'selected' : '';
                                     ?>
-                                    <option value="<?=$data['Nama_dumping'];?>"><?php echo $data['Nama_dumping'];?></option>
+                                    <option value="<?=$data['Nama_dumping'];?>" <?= $selected; ?>><?php echo $data['Nama_dumping'];?></option>
                                     <?php
                                     }
                                     ?>
@@ -186,13 +207,14 @@ while($data = mysqli_fetch_array($result))
 
                         <div class="form-group col-md-6">
                             <label><b>Lokasi Dumping Pengalihan 1</b></label>
-                            <select name="Dumping_pengalihan_1" id="select" class="form-control">
+                            <select name="Dumping_pengalihan_1" class="form-control">
                             <option disabled selected> Pilih </option>
                             <?php
                                     $query    =mysqli_query($conn, "SELECT * FROM dumping");
                                     while ($data = mysqli_fetch_array($query)) {
+                                        $selected = ($data['Nama_dumping'] == $dp1) ? 'selected' : '';
                                     ?>
-                                    <option value="<?=$data['Nama_dumping'];?>"><?php echo $data['Nama_dumping'];?></option>
+                                    <option value="<?=$data['Nama_dumping'];?>"<?= $selected; ?>><?php echo $data['Nama_dumping'];?></option>
                                     <?php
                                     }
                                     ?>
@@ -201,13 +223,14 @@ while($data = mysqli_fetch_array($result))
                    
                         <div class="form-group col-md-6">
                             <label><b>Lokasi Dumping Pengalihan 2</b></label>
-                            <select name="Dumping_pengalihan_2" id="select" class="form-control">
+                            <select name="Dumping_pengalihan_2" class="form-control">
                             <option disabled selected> Pilih </option>
                             <?php
                                     $query    =mysqli_query($conn, "SELECT * FROM dumping");
                                     while ($data = mysqli_fetch_array($query)) {
+                                        $selected = ($data['Nama_dumping'] == $dp2) ? 'selected' : '';
                                     ?>
-                                    <option value="<?=$data['Nama_dumping'];?>"><?php echo $data['Nama_dumping'];?></option>
+                                    <option value="<?=$data['Nama_dumping'];?>"<?= $selected; ?>><?php echo $data['Nama_dumping'];?></option>
                                     <?php
                                     }
                                     ?>
@@ -216,23 +239,43 @@ while($data = mysqli_fetch_array($result))
 
                         <div class="form-group col-md-6">
                             <label><b>Lokasi Dumping Pengalihan 3</b></label>
-                            <select name="Dumping_pengalihan_3" id="select" class="form-control">
+                            <select name="Dumping_pengalihan_3"  class="form-control">
                             <option disabled selected> Pilih </option>
                             <?php
                                     $query    =mysqli_query($conn, "SELECT * FROM dumping");
                                     while ($data = mysqli_fetch_array($query)) {
+                                        $selected = ($data['Nama_dumping'] == $dp3) ? 'selected' : '';
                                     ?>
-                                    <option value="<?=$data['Nama_dumping'];?>"><?php echo $data['Nama_dumping'];?></option>
+                                    <option value="<?=$data['Nama_dumping'];?>"<?= $selected; ?>><?php echo $data['Nama_dumping'];?></option>
                                     <?php
                                     }
                                     ?>
                             </select>
                         </div>
+
+                        <div class="form-group col-md-6">
+                        <label><b>Pengukuran</b></label>
+                            <select name="Pengukuran" class="form-control">
+                                <?php
+                                $ukur = array("Timbangan", "Rata Rata", "Belt Scale");
+                                foreach ($ukur as $option) {
+                                    $selected = ($option == $ukuran) ? 'selected' : '';
+                                ?>
+                                    <option value="<?= $option; ?>" <?= $selected; ?>><?php echo $option; ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                        <label><b>Status</b></label>
+                        <input type="text" name="Status" class="form-control" value="<?php echo $status?>"required>
+                        </div>
                     
                         <div class="form-group col-md-6">
                         <label><b>Jenis Batubara</b></label>
                             <div class="input-group">
-                            <input type="text" name="jenis_bb" class="form-control" required>
+                            <input type="text" name="jenis_bb" class="form-control" value="<?php echo $bb?>"required>
                                 <div class="input-group-append">
                                     <button name="add_fleet" value="simpan" class="btn btn-purple" type="submit">
                                     <i class="fa fa-plus mr-2"></i>Tambah</button>
