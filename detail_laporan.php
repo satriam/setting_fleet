@@ -26,7 +26,7 @@ $Exca = mysqli_query($conn,"SELECT DISTINCT Exca, SUM(tonase) AS Total_Tonase ,C
 //Exca ukur
 
 //Loc Exca
-$Excaloc = mysqli_query($conn,"SELECT DISTINCT Lokasi FROM detail_input WHERE ");
+$Excaloc = mysqli_query($conn,"SELECT DISTINCT Lokasi FROM detail_input WHERE tanggal = '$tanggal' AND shift = '$shift' AND grup = '$grup' ");
 //DT
 $Dump= mysqli_query($conn,"SELECT DISTINCT setting_dt, SUM(tonase) AS Total_Tonase FROM detail_input WHERE tanggal = '$tanggal' AND shift = '$shift' AND grup = '$grup' GROUP BY setting_dt;");
 ?>
@@ -313,7 +313,7 @@ while ($row = mysqli_fetch_assoc($Dump)) {
                 </tr>
             </table>
             <br>
-            <table class="table table-striped table-bordered table-sm dt-responsive tabell-data" width="100%">
+            <table class="table table-striped table-bordered table-sm dt-responsive nowrap" width="100%">
                         <thead class="thead-purple">
                             <tr>
                             <th>No</th>
