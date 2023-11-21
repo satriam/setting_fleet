@@ -22,6 +22,10 @@ include "config.php";
 <!-- Bootstrap CSS -->
 <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 
+<!-- driver js -->
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.css"/>
+
   
  
  
@@ -51,6 +55,72 @@ button.buttons-html5{
   font-size: .875rem !important;
   line-height: .5 !important;
 }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.floating-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Penambahan bayangan */
+}
+
+.act-btn {
+  background: green;
+  display: block;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  text-decoration: none;
+  transition: ease all 0.3s;
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+}
+
+.act-btn:hover {
+  background: blue;
+  transform: scale(1.1);
+}
+
+.menu {
+  display: none;
+  position: absolute;
+  bottom: 70px;
+  right: 10px;
+  background-color: rgba(255, 254, 255, 0.9);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Penambahan bayangan */
+  border-radius: 10px;
+  transition: ease all 0.3s;
+}
+
+.menu-item {
+  display: block;
+  padding: 10px;
+  width:150px;
+  text-decoration: none;
+  color: #333;
+  transition: background-color 0.3s;
+}
+
+.menu-item:hover {
+  background-color: #f0f0f0;
+}
+
+.menu.active {
+  display: block;
+}
+
   </style>
 </head>
 <body>
@@ -62,6 +132,7 @@ button.buttons-html5{
 
 
 <div id="unlockedContent">
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-purple text-white shadow-sm sticky-top d-md-none d-lg-none d-xl-none">
   <a class="navbar-brand" href="https://www.youtube.com/channel/UCyHwOyTkQBgwfWMOrblSUDg"><i class="fa fa-truck mr-1">REHANDLING BUKIT ASAM</i><b>
  </b></a>
@@ -108,14 +179,14 @@ button.buttons-html5{
 
   <div class="row">
   
-    <div class="col-md-3 mb-2 d-none d-md-block">
-        <div class="card">
+    <div class="col-md-3 mb-2 d-none d-md-block" >
+        <div class="card"  id="nav">
             <div class="card-header bg-purple">
                 <div class="card-tittle text-white">Hallo, <b>DISPATCHER</b></div>
             </div>
             <div class="card-body">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
+                    <li class="nav-item" id="dispatcher">
                         <a class="nav-link" href="index.php"><i class="fa fa-desktop text-purple mr-2"></i>Dispatch</a>
                     </li>
                     <li class="nav-item">

@@ -34,6 +34,7 @@
             </div>
             <div class="modal-body">
                 <p>The system is locked. Please unlock the system to access the content.</p>
+                <p>Trouble? <a href="https://wa.me/6285156145066" target="_blank">Chat Admin</a> </p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
@@ -41,12 +42,20 @@
         </div>
     </div>
 </div>
-
+<div class="floating-button">
+    <a class="act-btn" onclick="toggleMenu()"><i class="fa fa-question" aria-hidden="true"></i></a>
+    <div class="menu">
+        <a class="menu-item" onclick="handleMenuItem('Semuanya')">Semuanya</a>
+        <a href="#" class="menu-item" onclick="handleMenuItem('Option 2')">Setting Fleet</a>
+        <a href="#" class="menu-item" onclick="handleMenuItem('Option 3')">Option 3</a>
+    </div>
+</div>
 
 <!-- Locked Content -->
-<div class="container  justify-content-center align-items-center min-vh-100" id="lockedMessage">
+<div class="container d-flex justify-content-center align-items-center min-vh-100" id="lockedMessage">
     <h1 class="text-center">P BALAP!</h1>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.js.iife.js"></script>
     <script src="assets/js/jquery.slim.min.js"></script>
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
@@ -94,7 +103,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const unlockModal = new bootstrap.Modal(document.getElementById('unlockModal'), {});
     const lockPopupModal = new bootstrap.Modal(document.getElementById('lockPopupModal'), {}); // Modal for lock popup
     const lockedMessage = document.getElementById('lockedMessage'); // Reference to the locked message element
-
+    document.getElementById("unlockPassword").addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+            // Trigger the action you want here, for example, clicking the unlock button
+            document.getElementById("unlockButton").click();
+        }
+    });
     // Function to lock the system
     function lockSystem() {
         showLockedContent();
@@ -105,13 +119,13 @@ document.addEventListener('DOMContentLoaded', function () {
     function showLockedContent() {
         unlockedContent.classList.add('d-none');
         lockedMessage.classList.remove('d-none'); // Show the locked message
-        lockedMessage.classList.add('d-flex');
     }
 
     // Function to hide locked content
     function hideLockedContent() {
         lockedMessage.classList.add('d-none'); // Hide the locked message
-        lockedMessage.classList.remove('d-flex');
+        lockedMessage.classList.remove('d-flex'); // Hide the locked message
+
     }
 
     // Function to show unlocked content and hide locked content
@@ -171,6 +185,38 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 </script>
+
+
+<script>
+    const driver = window.driver.js.driver;
+    function toggleMenu() {
+    var menu = document.querySelector('.menu');
+    menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+}
+
+function handleMenuItem(option) {
+    
+    if (option === 'Semuanya') {
+        const driverObj = driver({
+  showProgress: true,
+  steps: [
+    { element: '#nav', popover: { title: 'Sidebar', description: 'Bagian ini Berisi data menu yang digunakan oleh dispatcher untuk melakukan semua setting data.', side: "left", align: 'start' }},
+    { element: '#dispatcher', popover: { title: 'Menu Dispatch', description: 'Menu ini digunakan untuk dispatch melakukan input data perDT melakukan dumping.', side: "right", align: 'start' }},
+    { element: 'code .line:nth-child(2)', popover: { title: 'Importing CSS', description: 'Import the CSS which gives you the default styling for popover and overlay.', side: "bottom", align: 'start' }},
+    { element: 'code .line:nth-child(4) span:nth-child(7)', popover: { title: 'Create Driver', description: 'Simply call the driver function to create a driver.js instance', side: "left", align: 'start' }},
+    { element: 'code .line:nth-child(18)', popover: { title: 'Start Tour', description: 'Call the drive method to start the tour and your tour will be started.', side: "top", align: 'start' }},
+    { element: 'a[href="/docs/configuration"]', popover: { title: 'More Configuration', description: 'Look at this page for all the configuration options you can pass.', side: "right", align: 'start' }},
+    { popover: { title: 'Happy Coding', description: 'And that is all, go ahead and start adding tours to your applications.' } }
+  ]
+});
+
+driverObj.drive();
+    }
+}
+
+</script>
+
+
 
 </body>
 </html>
