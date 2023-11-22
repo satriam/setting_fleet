@@ -195,7 +195,7 @@ if(!empty($_POST['simpan_laporan'])){
 
                             <div class="form-group col-md-6">
                                 <label><b>Jarak</b></label>
-                                <input type="text" id="jarak" name="jarak" class="form-control" readonly>
+                                <input type="text" id="jarakk" name="jarak" class="form-control" readonly>
                             </div>
                             <div class="form-group col-md-6">
                                 <label><b>Jam Dumping</b></label>
@@ -308,10 +308,7 @@ if(!empty($_POST['simpan_laporan'])){
                                         <?php
                                     }
                                     ?>
-<!-- 
-                                <a class="btn btn-danger btn-xs" href="?id=<?php echo $d['id_temporary']; ?>" 
-                                onclick="javascript:return confirm('Hapus Data Jarak ?');">
-                                <i class="fa fa-trash fa-xs"></i> Hapus</a> -->
+
                             </td>
 						</tr>
                         <?php }?>
@@ -351,7 +348,8 @@ if(!empty($_POST['simpan_laporan'])){
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 var jarak = xhr.responseText;
-                document.getElementById('jarak').value = jarak;
+                document.getElementById('jarakk').value = jarak;
+                console.log(jarak);
             }
         };
 

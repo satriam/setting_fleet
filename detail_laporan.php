@@ -156,22 +156,33 @@ $Dump= mysqli_query($conn,"SELECT DISTINCT setting_dt, SUM(tonase) AS Total_Tona
                         </tr>
                         <?php 
                         $ExcaUkur=mysqli_query($conn,"SELECT
-                        Exca,
+                        detail_input.Exca,
                         SUM(CASE WHEN Pengukuran = 'timbangan' THEN 1 ELSE 0 END) AS Jumlah_DT_Timbangan,
                         SUM(CASE WHEN Pengukuran = 'rata rata' THEN 1 ELSE 0 END) AS Jumlah_DT_Bypass,
-                        SUM(CASE WHEN Pengukuran = 'beltscale' THEN 1 ELSE 0 END) AS Jumlah_DT_Beltscale
+                        SUM(CASE WHEN Pengukuran = 'beltscale' THEN 1 ELSE 0 END) AS Jumlah_DT_Beltscale,
+                        MAX(CASE WHEN pengukuran.jenis = 'Bypass' THEN pengukuran.nilai END) * SUM(CASE WHEN Pengukuran = 'rata rata' THEN 1 ELSE 0 END) as total
                     FROM detail_input
-                    WHERE tanggal = '$tanggal' AND shift = '$shift' AND grup = '$grup' AND Exca = '$excaValue'
-                    GROUP BY Exca;");
+                    INNER JOIN 
+                    unit_exca ON unit_exca.unit = detail_input.Exca  
+                    INNER JOIN 
+                    pengukuran ON unit_exca.mitra = pengukuran.perusahaan 
+                    WHERE 
+                        tanggal = '$tanggal' 
+                        AND shift = '$shift' 
+                        AND grup = '$grup' 
+                        AND Exca = '$excaValue'
+                    GROUP BY 
+                    detail_input.Exca;");
                             while ($row = mysqli_fetch_assoc($ExcaUkur)) {
                                 $bypass = $row['Jumlah_DT_Bypass'];
                                 $timbang = $row['Jumlah_DT_Timbangan'];
                                 $belt = $row['Jumlah_DT_Beltscale'];
+                                $jumlahbypass = $row['total']
                             ?>
                         <tr style="border-bottom:1px dashed">
                             <td><b>Ritase Pengukuran Bypass</b></td>
                             <td>:</td>
-                            <td style="padding-left: 10px;"><?php echo $bypass?></td>
+                            <td style="padding-left: 10px;"><?php echo $bypass?> (jumlah ton : <?php echo $jumlahbypass?> Ton)</td>
                         </tr>
                         <tr style="border-bottom:1px dashed">
                             <td><b>Ritase Pengukuran Timbangan</b></td>
@@ -311,6 +322,7 @@ while ($row = mysqli_fetch_assoc($Dump)) {
                             }
                         ?></td>
                 </tr>
+               
             </table>
             <br>
             <table class="table table-striped table-bordered table-sm dt-responsive nowrap tabell-data" width="100%">
