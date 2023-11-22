@@ -1,4 +1,5 @@
 <?php include 'template/header.php';?>
+
 <?php 
 if(!empty($_POST['add_barang'])){
     // $id = $_POST['id_barang'];
@@ -6,7 +7,7 @@ if(!empty($_POST['add_barang'])){
     $mitra = $_POST['mitra'];
     // $tgl = $_POST['tgl_input'];
     
-    mysqli_query($conn,"insert into unit values('','$unit','$mitra')")
+    mysqli_query($conn,"insert into unit_exca values('','$unit','$mitra')")
     or die(mysqli_error($conn));
     echo '<script>window.location="unit.php"</script>';
 }
@@ -14,12 +15,34 @@ if(!empty($_POST['add_barang'])){
 ?>
 
   <div class="col-md-9 mb-2">
+  
     <div class="row">
-
+    
     <!-- barang -->
-    <div class="col-md-12 mb-3">
+  
+    
+  <div class="col-md-12 mb-3">
+  <?php 
+	include 'config.php';
+	if(!empty($_GET['id'])){
+		$id= $_GET['id'];
+		$hapus_data = mysqli_query($conn, "DELETE FROM unit_exca WHERE id_unit ='$id'");
+		// echo '<script>window.location="unit.php"</script>';
+        echo "
+        <div class='alert alert-success alert-dismissible fade show' role='alert'>
+  <strong>YESS!</strong> data berhasil dihapus.
+  <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+    <span aria-hidden='true'>&times;</span>
+  </button>";
+	}
+
+?>
+</div>
+<div class="col-md-12 mb-3">
         <div class="card">
+    
         <div class="card-header bg-purple">
+     
                 <div class="card-tittle text-white"><i class="fa fa-plus-square"></i> <b>Tambah Unit Exca</b></div>
             </div>
             <div class="card-body">
@@ -43,6 +66,7 @@ if(!empty($_POST['add_barang'])){
                         </div>
                     </div>
                 </form>
+               
             </div>
         </div>
     </div>
@@ -86,21 +110,15 @@ if(!empty($_POST['add_barang'])){
                         <?php }?>
 					</tbody>
                 </table>
+           
             </div>
         </div>
+ 
     </div>
     <!-- end table barang -->
-
+    
     </div><!-- end row col-md-9 -->
   </div>
   
-  <?php 
-	include 'config.php';
-	if(!empty($_GET['id'])){
-		$id= $_GET['id'];
-		$hapus_data = mysqli_query($conn, "DELETE FROM unit WHERE id_unit ='$id'");
-		echo '<script>window.location="unit.php"</script>';
-	}
-
-?>
+ 
 <?php include 'template/footer.php';?>

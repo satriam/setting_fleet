@@ -14,7 +14,7 @@ if(isset($_POST['update']))
     $nama = $_POST['unit'];
     $mitra = $_POST['mitra'];
 
-    $result = mysqli_query($conn, "UPDATE unit SET unit='$nama',mitra='$mitra' WHERE id_unit=$id");
+    $result = mysqli_query($conn, "UPDATE unit_exca SET unit='$nama',mitra='$mitra' WHERE id_unit=$id");
     if(!$result){
         echo "
         <div class='alert alert-danger alert-dismissible fade show' role='alert'>
@@ -56,7 +56,7 @@ if(isset($_POST['update']))
 ?>
 <?php
 $id = $_GET['id'];
-$result = mysqli_query($conn, "SELECT * FROM unit WHERE id_unit=$id");
+$result = mysqli_query($conn, "SELECT * FROM unit_exca WHERE id_unit=$id");
 // var_dump($result);die;
 while($data = mysqli_fetch_array($result))
 {

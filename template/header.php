@@ -134,7 +134,7 @@ body {
 <div id="unlockedContent">
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-purple text-white shadow-sm sticky-top d-md-none d-lg-none d-xl-none">
-  <a class="navbar-brand" href="https://www.youtube.com/channel/UCyHwOyTkQBgwfWMOrblSUDg"><i class="fa fa-truck mr-1">REHANDLING BUKIT ASAM</i><b>
+  <a class="navbar-brand" href="https://www.youtube.com/satriamulya"><i class="fa fa-truck mr-1">REHANDLING BUKIT ASAM</i><b>
  </b></a>
   <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <i class="fa fa-bars"></i>
@@ -170,7 +170,7 @@ body {
 </nav>
 
 <div class="bg-purple text-center py-2 shadow-sm sticky-top d-none d-md-block">
-<a class="navbar-brand text-white" href="https://www.youtube.com/channel/UCyHwOyTkQBgwfWMOrblSUDg"><i class="fa fa-truck mr-1"> REHANDLING BUKIT ASAM</i><b>
+<a class="navbar-brand text-white" href="https://www.youtube.com/satriamulya"><i class="fa fa-truck mr-1"> REHANDLING BUKIT ASAM</i><b>
   </b></a>
 </div>
 <br>
@@ -189,19 +189,19 @@ body {
                     <li class="nav-item" id="dispatcher">
                         <a class="nav-link" href="index.php"><i class="fa fa-desktop text-purple mr-2"></i>Dispatch</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="settingfleet">
                         <a class="nav-link" href="setting_fleet.php"><i class="fa fa-tasks text-purple mr-2" aria-hidden="true"></i>Setting Fleet</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="settingdt">
                         <a class="nav-link" href="setting_dt.php"><i class="fa fa-tasks text-purple mr-2" aria-hidden="true"></i>Setting Dump Truck</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="unit">
                         <a class="nav-link" href="unit.php"><i class="fa fa-car text-purple mr-2" aria-hidden="true"></i>Unit</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="jarak">
                         <a class="nav-link" href="jarak.php"><i class="fa fa-location-arrow text-purple mr-2"></i>Jarak</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="laporan">
                         <a class="nav-link" href="laporan.php"><i class="fa fa-table text-purple mr-2"></i>Laporan</a>
                     </li>
                     <!-- <li class="nav-item">
@@ -214,4 +214,12 @@ body {
          </div>
     </div>
   </div>
+  <div class="floating-button">
+    <a class="act-btn" onclick="toggleMenu()"><i class="fa fa-question" aria-hidden="true"></i></a>
+    <div class="menu">
+        <a class="menu-item" onclick="handleMenuItem('Menu')">Menu</a>
+        <a href="#" class="menu-item" onclick="handleMenuItem('Laporan')">Laporan</a>
+        <a href="#" class="menu-item" onclick="handleMenuItem('Option 3')">Option 3</a>
+    </div>
+</div>
 

@@ -9,7 +9,7 @@
         <div class="card-header bg-purple">
                 <div class="card-tittle text-white"><i class="fa fa-table"></i> <b>Data Laporan</b></div>
             </div>
-            <div class="card-body">
+            <div class="card-body" id="laporantabel">
                 <table class="table table-striped table-bordered table-sm dt-responsive nowrap" id="table" width="100%">
                         <thead class="thead-purple">
                             <tr>
@@ -76,5 +76,6 @@
         form.submit();
     }
 </script>
+
 
 <?php include 'template/footer.php';?>

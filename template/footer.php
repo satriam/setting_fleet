@@ -42,14 +42,7 @@
         </div>
     </div>
 </div>
-<div class="floating-button">
-    <a class="act-btn" onclick="toggleMenu()"><i class="fa fa-question" aria-hidden="true"></i></a>
-    <div class="menu">
-        <a class="menu-item" onclick="handleMenuItem('Semuanya')">Semuanya</a>
-        <a href="#" class="menu-item" onclick="handleMenuItem('Option 2')">Setting Fleet</a>
-        <a href="#" class="menu-item" onclick="handleMenuItem('Option 3')">Option 3</a>
-    </div>
-</div>
+
 
 <!-- Locked Content -->
 <div class="container d-flex justify-content-center align-items-center min-vh-100" id="lockedMessage">
@@ -196,24 +189,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function handleMenuItem(option) {
     
-    if (option === 'Semuanya') {
+    if (option === 'Menu') {
         const driverObj = driver({
   showProgress: true,
   steps: [
     { element: '#nav', popover: { title: 'Sidebar', description: 'Bagian ini Berisi data menu yang digunakan oleh dispatcher untuk melakukan semua setting data.', side: "left", align: 'start' }},
     { element: '#dispatcher', popover: { title: 'Menu Dispatch', description: 'Menu ini digunakan untuk dispatch melakukan input data perDT melakukan dumping.', side: "right", align: 'start' }},
-    { element: 'code .line:nth-child(2)', popover: { title: 'Importing CSS', description: 'Import the CSS which gives you the default styling for popover and overlay.', side: "bottom", align: 'start' }},
-    { element: 'code .line:nth-child(4) span:nth-child(7)', popover: { title: 'Create Driver', description: 'Simply call the driver function to create a driver.js instance', side: "left", align: 'start' }},
-    { element: 'code .line:nth-child(18)', popover: { title: 'Start Tour', description: 'Call the drive method to start the tour and your tour will be started.', side: "top", align: 'start' }},
-    { element: 'a[href="/docs/configuration"]', popover: { title: 'More Configuration', description: 'Look at this page for all the configuration options you can pass.', side: "right", align: 'start' }},
-    { popover: { title: 'Happy Coding', description: 'And that is all, go ahead and start adding tours to your applications.' } }
+    { element: '#settingfleet', popover: { title: 'Menu Setting Fleet', description: 'Menu Setting Fleet digunakan untuk menginput data fleet exca yang akan beroperasi dan lokasi exca oleh dispatcher', side: "right", align: 'start' }},
+    { element: '#settingdt', popover: { title: 'Menu Setting Dump Truck', description: 'Menu Setting Dump Truck digunakan untuk menginputkan data dump truck yang akan beroperasi dan dengan exca mana dump truck melakukan loading', side: "left", align: 'start' }},
+    { element: '#unit', popover: { title: 'Menu Unit', description: 'Menu unit digunakan untuk menginputkan data Exca jika terdapat exca baru', side: "right", align: 'start' }},
+    { element: '#jarak', popover: { title: 'Menu Jarak', description: 'Menu Jarak digunakan untuk menginputkan data Jarak Antara Loading Point dan Dumping Point.', side: "right", align: 'start' }},
+    { element: '#laporan', popover: { title: 'Menu Laporan', description: 'Menu Laporan digunakan untuk melihat data laporan yang sudah diinputkan oleh dispatcher, rekap laporan akan masuk ke menu laporan di akhir shift', side: "right", align: 'start' }},
+    { popover: { title: 'Selamat Bekerja!', description: 'jika ada pertanyaan, silahkan tanyakan pada admin' } }
   ]
 });
 
 driverObj.drive();
     }
 }
-
 </script>
 
 

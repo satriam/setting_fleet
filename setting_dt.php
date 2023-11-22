@@ -142,10 +142,10 @@ if(!empty($_POST['add_barang'])){
                             <td><?php echo $d['Exca']; ?></td>
                             <td><?php echo $d['Nama_DT']; ?></td>
                             <td>
-                                <a class="btn btn-primary btn-xs" href="edit.php?id=<?php echo $d['id_setting_dt']; ?>">
+                                <a class="btn btn-primary btn-xs" href="edit_setting_dt.php?id=<?php echo $d['id_setting_dt']; ?>">
                                 <i class="fa fa-pen fa-xs"></i> Edit</a>
                                 <a class="btn btn-danger btn-xs" href="?id=<?php echo $d['id_setting_dt']; ?>" 
-                                onclick="javascript:return confirm('Hapus Data Barang ?');">
+                                onclick="javascript:return confirm('Hapus Data Setting DT ?');">
                                 <i class="fa fa-trash fa-xs"></i> Hapus</a>
                             </td>
 						</tr>
@@ -163,8 +163,8 @@ if(!empty($_POST['add_barang'])){
 	include 'config.php';
 	if(!empty($_GET['id'])){
 		$id= $_GET['id'];
-		$hapus_data = mysqli_query($conn, "DELETE FROM unit WHERE id_unit ='$id'");
-		echo '<script>window.location="unit.php"</script>';
+		$hapus_data = mysqli_query($conn, "DELETE FROM setting_dt WHERE id_setting_dt ='$id'");
+		echo '<script>window.location="setting_dt.php"</script>';
 	}
 
 ?>
