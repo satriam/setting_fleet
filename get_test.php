@@ -1,10 +1,6 @@
 <?php
 // Koneksi ke database
-$conn = mysqli_connect("localhost", "root", "", "dispatcher");
-
-if (!$conn) {
-    die("Koneksi gagal: " . mysqli_connect_error());
-}
+include "config.php";
 
 if (isset($_GET['nama_loading']) && isset($_GET['nama_dumping'])) {
     $nama_loading = $_GET['nama_loading'];

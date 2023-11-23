@@ -23,18 +23,7 @@ if ($enteredPassword === null) {
 // Fungsi untuk verifikasi kata sandi
 function verifyPassword($enteredPassword) {
     // Gantilah kredensial database sesuai dengan yang Anda gunakan
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "dispatcher";
-
-    // Buat koneksi
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Periksa koneksi
-    if ($conn->connect_error) {
-        return ['success' => false, 'error' => 'Connection to the database failed'];
-    }
+    include "config.php";
     // $hashedPassword = password_hash($enteredPassword, PASSWORD_DEFAULT);
     // Ambil kata sandi dan status aktif dari database
     $query = "SELECT password_hash, active FROM verify ";
