@@ -20,14 +20,14 @@ if(!empty($_POST['add_barang'])){
     <div class="col-md-12 mb-3">
         <div class="card">
         <div class="card-header bg-purple">
-                <div class="card-tittle text-white"><i class="fa fa-shopping-cart"></i> <b>Tambah Unit Exca</b></div>
+                <div class="card-tittle text-white"><i class="fa fa-shopping-cart"></i> <b>Tambah Unit DT</b></div>
             </div>
             <div class="card-body">
                 <form method="POST">
                     <div class="form-row">
 
                         <div class="form-group col-md-6">
-                        <label><b>Nama Unit Exca</b></label>
+                        <label><b>Nama Unit DT</b></label>
                         <input type="text" name="unit" class="form-control" required>
                         </div>
                     
@@ -60,7 +60,7 @@ if(!empty($_POST['add_barang'])){
                         <thead class="thead-purple">
                             <tr>
                                 <th>No</th>
-                                <th>Nama Unit Exca</th>
+                                <th>Nama Unit DT</th>
                                 <th>Mitra</th>
                                 <th>Opsi</th>
                             </tr>
@@ -68,7 +68,7 @@ if(!empty($_POST['add_barang'])){
                         <tbody>
                         <?php 
                         $no = 1;
-                        $data_barang = mysqli_query($conn,"select * from unit_exca order by id_unit DESC");
+                        $data_barang = mysqli_query($conn,"select * from unit_dt order by id_unit DESC");
                         while($d = mysqli_fetch_array($data_barang)){
                             ?>
                         <tr>
@@ -79,7 +79,7 @@ if(!empty($_POST['add_barang'])){
                                 <a class="btn btn-primary btn-xs" href="edit.php?id=<?php echo $d['id_unit']; ?>">
                                 <i class="fa fa-pen fa-xs"></i> Edit</a>
                                 <a class="btn btn-danger btn-xs" href="?id=<?php echo $d['id_unit']; ?>" 
-                                onclick="javascript:return confirm('Hapus Data Barang ?');">
+                                onclick="javascript:return confirm('Hapus Data Unit DT ?');">
                                 <i class="fa fa-trash fa-xs"></i> Hapus</a>
                             </td>
 						</tr>

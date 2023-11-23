@@ -34,6 +34,7 @@
             </div>
             <div class="modal-body">
                 <p>The system is locked. Please unlock the system to access the content.</p>
+                <p>Trouble? <a href="https://wa.me/6285156145066" target="_blank">Chat Admin</a> </p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
@@ -44,9 +45,10 @@
 
 
 <!-- Locked Content -->
-<div class="container  justify-content-center align-items-center min-vh-100" id="lockedMessage">
+<div class="container d-flex justify-content-center align-items-center min-vh-100" id="lockedMessage">
     <h1 class="text-center">P BALAP!</h1>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.js.iife.js"></script>
     <script src="assets/js/jquery.slim.min.js"></script>
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
@@ -94,7 +96,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const unlockModal = new bootstrap.Modal(document.getElementById('unlockModal'), {});
     const lockPopupModal = new bootstrap.Modal(document.getElementById('lockPopupModal'), {}); // Modal for lock popup
     const lockedMessage = document.getElementById('lockedMessage'); // Reference to the locked message element
-
+    document.getElementById("unlockPassword").addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+            // Trigger the action you want here, for example, clicking the unlock button
+            document.getElementById("unlockButton").click();
+        }
+    });
     // Function to lock the system
     function lockSystem() {
         showLockedContent();
@@ -105,13 +112,13 @@ document.addEventListener('DOMContentLoaded', function () {
     function showLockedContent() {
         unlockedContent.classList.add('d-none');
         lockedMessage.classList.remove('d-none'); // Show the locked message
-        lockedMessage.classList.add('d-flex');
     }
 
     // Function to hide locked content
     function hideLockedContent() {
         lockedMessage.classList.add('d-none'); // Hide the locked message
-        lockedMessage.classList.remove('d-flex');
+        lockedMessage.classList.remove('d-flex'); // Hide the locked message
+
     }
 
     // Function to show unlocked content and hide locked content
@@ -128,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to check if the system is locked and update the UI accordingly
     function checkLockStatus() {
-        const lockTime = localStorage.getItem('lockTime');
+        const lockTime = localStorage.getItem('?hs78gjdhf9873hfjdbbc7');
         const currentTime = new Date().getTime();
         const sixHoursInMillis = 6 * 60 * 60 * 1000; // 6 hours in milliseconds
 
@@ -143,19 +150,80 @@ document.addEventListener('DOMContentLoaded', function () {
     // Check the lock status when the page loads
     checkLockStatus();
 
-    // Event listener for the unlock button
-    unlockButton.addEventListener('click', function () {
-        const enteredPassword = unlockPasswordInput.value;
-        // Add your password validation logic here
-        // For simplicity, let's assume the correct password is 'password'
-        if (enteredPassword === 'rehandling2023!') {
-            localStorage.setItem('lockTime', new Date().getTime());
-            showUnlockedContent();
-            hideLockedContent(); // Hide the locked message when unlocked
-        } else {
-            alert('Incorrect Password. Please try again.');
+    // // Event listener for the unlock button
+    // unlockButton.addEventListener('click', function () {
+    //     const enteredPassword = unlockPasswordInput.value;
+    //     // Add your password validation logic here
+    //     // For simplicity, let's assume the correct password is 'password'
+    //     if (enteredPassword === 'rehandling2023!') {
+    //         localStorage.setItem('lockTime', new Date().getTime());
+    //         showUnlockedContent();
+    //         hideLockedContent(); // Hide the locked message when unlocked
+    //     } else {
+    //         alert('Incorrect Password. Please try again.');
+    //     }
+    // });
+
+
+// Event listener for the unlock button
+unlockButton.addEventListener('click', function () {
+    const enteredPassword = unlockPasswordInput.value;
+
+    // Kirim data ke server untuk verifikasi
+    fetch('verify_password.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `password=${encodeURIComponent(enteredPassword)}`,
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
         }
-    });
+        return response.json();
+    })
+    .then(data => {
+        if (data.success) {     
+            // Dapatkan informasi sistem operasi dan browser
+            const os = window.navigator.platform;
+            const browser = window.navigator.userAgent;
+
+    // Introduce a delay before making the next request
+    setTimeout(() => {
+        // Kirim data ke server PHP menggunakan metode POST
+        fetch('save_computer_info.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `operatingSystem=${encodeURIComponent(os)}&browser=${encodeURIComponent(browser)}`,
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.text();
+        })
+        .then(message => {
+            console.log(message);
+            // Lakukan tindakan selanjutnya setelah data disimpan
+            localStorage.setItem('?hs78gjdhf9873hfjdbbc7', new Date().getTime());
+            showUnlockedContent();
+            hideLockedContent(); 
+        })
+        .catch(error => console.error('Failed to save computer info:', error.message));
+    }, 1000); // Adjust the delay (in milliseconds) as needed
+}
+               
+  else {
+            alert('Gagal Masuk! ' + data.error); // Include specific error message
+        }
+    })
+    .catch(error => console.error('Failed to verify password:', error.message));
+});
+
+
 
     // Event listener for the "OK" button on the lock popup modal
     const lockPopupOkButton = document.querySelector('#lockPopupModal .btn-primary');
@@ -171,6 +239,38 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 </script>
+
+
+<script>
+    const driver = window.driver.js.driver;
+    function toggleMenu() {
+    var menu = document.querySelector('.menu');
+    menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+}
+
+function handleMenuItem(option) {
+    
+    if (option === 'Menu') {
+        const driverObj = driver({
+  showProgress: true,
+  steps: [
+    { element: '#nav', popover: { title: 'Sidebar', description: 'Bagian ini Berisi data menu yang digunakan oleh dispatcher untuk melakukan semua setting data.', side: "left", align: 'start' }},
+    { element: '#dispatcher', popover: { title: 'Menu Dispatch', description: 'Menu ini digunakan untuk dispatch melakukan input data perDT melakukan dumping.', side: "right", align: 'start' }},
+    { element: '#settingfleet', popover: { title: 'Menu Setting Fleet', description: 'Menu Setting Fleet digunakan untuk menginput data fleet exca yang akan beroperasi dan lokasi exca oleh dispatcher', side: "right", align: 'start' }},
+    { element: '#settingdt', popover: { title: 'Menu Setting Dump Truck', description: 'Menu Setting Dump Truck digunakan untuk menginputkan data dump truck yang akan beroperasi dan dengan exca mana dump truck melakukan loading', side: "left", align: 'start' }},
+    { element: '#unit', popover: { title: 'Menu Unit', description: 'Menu unit digunakan untuk menginputkan data Exca jika terdapat exca baru', side: "right", align: 'start' }},
+    { element: '#jarak', popover: { title: 'Menu Jarak', description: 'Menu Jarak digunakan untuk menginputkan data Jarak Antara Loading Point dan Dumping Point.', side: "right", align: 'start' }},
+    { element: '#laporan', popover: { title: 'Menu Laporan', description: 'Menu Laporan digunakan untuk melihat data laporan yang sudah diinputkan oleh dispatcher, rekap laporan akan masuk ke menu laporan di akhir shift', side: "right", align: 'start' }},
+    { popover: { title: 'Selamat Bekerja!', description: 'jika ada pertanyaan, silahkan tanyakan pada admin' } }
+  ]
+});
+
+driverObj.drive();
+    }
+}
+</script>
+
+
 
 </body>
 </html>

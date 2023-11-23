@@ -9,7 +9,7 @@
         <div class="card-header bg-purple">
                 <div class="card-tittle text-white"><i class="fa fa-table"></i> <b>Data Laporan</b></div>
             </div>
-            <div class="card-body">
+            <div class="card-body" id="laporantabel">
                 <table class="table table-striped table-bordered table-sm dt-responsive nowrap" id="table" width="100%">
                         <thead class="thead-purple">
                             <tr>
@@ -37,8 +37,6 @@
                             <td><?php echo $d['tanggal']; ?></td>
                          
                             <td>
-                            <!-- <a class="btn btn-primary btn-xs" href="detail_laporan.php?id=<?php echo $d['id_laporan']; ?>">
-                                <i class="fa fa-pen fa-xs"></i> detail</a> -->
                             <a class="btn btn-primary btn-xs" onclick="viewDetail(<?php echo $d['id_laporan']; ?>)">
                                 <i class="fa fa-pen fa-xs"></i> detail</a>
                             </td>
@@ -76,5 +74,6 @@
         form.submit();
     }
 </script>
+
 
 <?php include 'template/footer.php';?>
