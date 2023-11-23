@@ -1,12 +1,5 @@
 <?php
-// Sambungkan ke database
-$conn = mysqli_connect("localhost", "root", "", "dispatcher");
-
-if (!$conn) {
-    die("Koneksi ke database gagal: " . mysqli_connect_error());
-}
-
-// Dapatkan nilai "nama_dt" dari permintaan
+include "config.php";
 
 
 if (isset($_GET['nama_dt'])) {
