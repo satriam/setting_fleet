@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2023 at 09:35 AM
+-- Generation Time: Nov 23, 2023 at 05:42 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -20,6 +20,37 @@ SET time_zone = "+00:00";
 --
 -- Database: `dispatcher`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `computer_info`
+--
+
+CREATE TABLE `computer_info` (
+  `id` int(11) NOT NULL,
+  `operating_system` varchar(255) DEFAULT NULL,
+  `browser` varchar(255) DEFAULT NULL,
+  `ip_address` varchar(15) DEFAULT NULL,
+  `access_time` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `computer_info`
+--
+
+INSERT INTO `computer_info` (`id`, `operating_system`, `browser`, `ip_address`, `access_time`) VALUES
+(1, 'Win32', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Mobile Safari/537.36', 'undefined', '2023-11-23 01:45:18'),
+(2, 'Win32', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', 'undefined', '2023-11-23 01:47:30'),
+(3, 'Win32', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', 'undefined', '2023-11-23 01:49:52'),
+(4, 'Win32', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Mobile Safari/537.36', 'undefined', '2023-11-23 01:51:02'),
+(5, 'Win32', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Mobile Safari/537.36', NULL, '2023-11-23 03:11:35'),
+(6, 'Win32', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Mobile Safari/537.36', NULL, '2023-11-23 04:05:38'),
+(7, 'Win32', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Mobile Safari/537.36', NULL, '2023-11-23 04:06:01'),
+(8, 'Win32', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Mobile Safari/537.36', NULL, '2023-11-23 04:26:31'),
+(9, 'Win32', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Mobile Safari/537.36', NULL, '2023-11-23 04:29:58'),
+(10, 'Win32', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Mobile Safari/537.36', NULL, '2023-11-23 04:30:13'),
+(11, 'Win32', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', NULL, '2023-11-23 04:37:56');
 
 -- --------------------------------------------------------
 
@@ -67,16 +98,69 @@ INSERT INTO `detail_input` (`id_temporary`, `tanggal`, `shift`, `grup`, `setting
 (14, '8 November 2023 03:12:26', '', '', '1', '', 0, 'Ts Aren', 'DH 4', '2 km', '', '', '', '', '00:00:00', 0, '2023-11-09 01:43:55'),
 (15, '8 November 2023 03:12:26', '', '', '1', '', 0, 'Ts Aren', 'DH 4', '2 km', '', '', '', '', '00:00:00', 0, '2023-11-09 01:44:05'),
 (16, '8 November 2023 03:12:26', '', '', '1', '', 0, 'Ts Merbau', 'DH 4', '20 km', '', '', '', '', '00:00:00', 0, '2023-11-09 01:44:21'),
-(17, '8 November 2023 03:12:26', '', '', '5', '', 40, 'Ts Merbau', 'DH 4', '20 km', '', '', '', '', '00:00:00', 0, '2023-11-09 01:46:19'),
-(18, '8 November 2023 03:12:26', 'Shift 1', 'Grup C', '1', '', 300000, 'Ts Merbau', 'DH 4', '20 km', '', '', '', '', '08:54:00', 20, '2023-11-09 01:52:48'),
-(19, '9 November 2023 10:06:53', 'Shift 3', 'Grup B', 'DT01SGJ', 'Exca 04 SGJ', 30000, 'Ts Sungkai', '1B', '2 km', 'BB47', 'TAL', 'Timbangan', '', '12:08:00', 35, '2023-11-09 03:08:21'),
+(17, '8 November 2023 03:12:26', '', '', '5', 'kk', 40, 'Ts Merbau', 'DH 4', '20 km', 'kk', '', '', '', '00:00:00', 0, '2023-11-09 01:46:19'),
+(19, '9 November 2023 10:06:53', 'Shift 3', 'Grup B', 'DT01SGJ', 'Exca 01 SGJ', 30000, 'Ts Sungkai', '1B', '2 km', 'BB47', 'TAL', 'Rata Rata', '', '12:08:00', 35, '2023-11-09 03:08:21'),
 (20, '9 November 2023 10:06:53', 'Shift 3', 'Grup B', 'DT01SGJ', 'Exca 04 SGJ', 0, 'Ts Sungkai', '1B', '2 km', 'BB47', 'TAL', 'Timbangan', '', '08:26:00', 10, '2023-11-13 01:22:06'),
 (21, '9 November 2023 10:06:53', 'Shift 3', 'Grup B', 'DT11SGJ', 'Exca 03 SGJ', 40000, 'Ts Aren', '1B', '2 km', 'BB47', 'TAL', 'Timbangan', '', '09:06:00', 15, '2023-11-13 02:03:39'),
-(22, '9 November 2023 10:06:53', 'Shift 3', 'Grup B', 'DT01SGJ', 'Exca 01 SGJ', 0, 'Ts Sungkai', '1B', '2 km', 'BB47', 'TAL', 'Timbangan', '', '10:14:00', 34, '2023-11-13 03:11:03'),
-(23, '9 November 2023 10:06:53', 'Shift 3', 'Grup B', 'DT11SGJ', 'Exca 01 SGJ', 30000, 'Ts Sungkai', '1B', '2 km', 'BB47', 'TAL', 'Timbangan', '', '00:00:00', 35, '2023-11-15 00:51:29'),
+(22, '9 November 2023 10:06:53', 'Shift 3', 'Grup B', 'DT01SGJ', 'Exca 01 SGJ', 0, 'Ts Sungkai', '1B', '2 km', 'BB47', 'TAL', 'Rata Rata', '', '10:14:00', 34, '2023-11-13 03:11:03'),
+(23, '9 November 2023 10:06:53', 'Shift 3', 'Grup B', 'DT11SGJ', 'Exca 3019 RDP', 30000, 'Ts Sungkai', '1B', '2 km', 'BB47', 'TAL', 'Rata Rata', '', '00:00:00', 35, '2023-11-15 00:51:29'),
 (24, '9 November 2023 10:06:53', 'Shift 3', 'Grup B', 'DT11SGJ', 'Exca 01 SGJ', 20000, 'Ts Sungkai', '1B', '2 km', 'BB47', 'TAL', 'Timbangan', 'Antar Stock', '07:03:00', 30, '2023-11-15 01:00:09'),
 (25, '9 November 2023 10:06:53', 'Shift 3', 'Grup B', 'DT01SGJ', 'Exca 01 SGJ', 0, 'Ts Sungkai', '1B', '2 km', 'BB47', 'Banko', 'Rata Rata', 'Antar Stock', '08:05:00', 4, '2023-11-15 01:02:50'),
 (26, '15 November 2023 08:08:31', 'Shift 3', 'Grup A', 'DT01SGJ', 'Exca 01 SGJ', 0, 'Ts Sungkai', '1B', '2 km', 'BB47', 'Banko', 'Rata Rata', 'Antar Stock', '09:15:00', 2, '2023-11-15 02:57:20');
+
+--
+-- Triggers `detail_input`
+--
+DELIMITER $$
+CREATE TRIGGER `delete_detail` BEFORE DELETE ON `detail_input` FOR EACH ROW BEGIN
+    INSERT INTO log_detail_input
+    set 
+    id_temporary = OLD.id_temporary,
+    tanggal=old.tanggal,
+    shift=old.shift,
+    grup=old.grup,
+    setting_dt=old.setting_dt,
+    exca=old.exca,
+    tonase=old.tonase,
+    loading_point=old.loading_point,
+    dumping_point=old.dumping_point,
+    jarak=old.jarak,
+    Jenis_BB=old.Jenis_BB,
+    Lokasi=old.Lokasi,
+    Pengukuran=old.Pengukuran,
+    Status=old.Status,
+    jam=old.jam,
+    waktu=old.waktu,
+    created_log = NOW(),
+    status_action="DIHAPUS"; 
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `update` BEFORE UPDATE ON `detail_input` FOR EACH ROW BEGIN
+    INSERT INTO log_detail_input
+    set 
+    id_temporary = OLD.id_temporary,
+    tanggal=old.tanggal,
+    shift=old.shift,
+    grup=old.grup,
+    setting_dt=old.setting_dt,
+    exca=old.exca,
+    tonase=old.tonase,
+    loading_point=old.loading_point,
+    dumping_point=old.dumping_point,
+    jarak=old.jarak,
+    Jenis_BB=old.Jenis_BB,
+    Lokasi=old.Lokasi,
+    Pengukuran=old.Pengukuran,
+    Status=old.Status,
+    jam=old.jam,
+    waktu=old.waktu,
+    created_log = NOW(),
+    status_action="DIUPDATE"; 
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -125,7 +209,23 @@ CREATE TABLE `fleet_info` (
 --
 
 INSERT INTO `fleet_info` (`id`, `Tanggal`, `Shift`, `Grup`) VALUES
-(8, '15 November 2023 08:08:31', 'Shift 3', 'Grup A');
+(8, '15 November 2023 08:08:31', 'Shift 3', 'Grup C');
+
+--
+-- Triggers `fleet_info`
+--
+DELIMITER $$
+CREATE TRIGGER `update_fleet` BEFORE UPDATE ON `fleet_info` FOR EACH ROW BEGIN
+INSERT INTO log_fleet_info SET
+id=old.id,
+Tanggal=old.Tanggal,
+Shift=old.Shift,
+Grup=old.Grup,
+Status_log="DIUPDATE",
+Created_log=NOW(); 
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -150,7 +250,8 @@ INSERT INTO `jarak` (`Id_jarak`, `Nama_loading`, `Nama_dumping`, `jarak`) VALUES
 (3, 'Ts Niru', 'DH 4', 40.6),
 (5, 'Ts Merbau', 'DH 4', 20),
 (6, 'Ts Aren', 'DH 4', 2),
-(7, 'Ts Sungkai', '1B', 2);
+(7, 'Ts Sungkai', '1B', 2),
+(8, 'Ts Sungkai', '1A', 5);
 
 -- --------------------------------------------------------
 
@@ -219,6 +320,122 @@ INSERT INTO `loading` (`id_loading`, `Nama_loading`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `log_detail_input`
+--
+
+CREATE TABLE `log_detail_input` (
+  `id_log_detail_input` int(11) NOT NULL,
+  `id_temporary` int(11) NOT NULL,
+  `tanggal` varchar(50) NOT NULL,
+  `shift` varchar(30) NOT NULL,
+  `grup` varchar(30) NOT NULL,
+  `setting_dt` varchar(100) NOT NULL,
+  `exca` varchar(100) NOT NULL,
+  `tonase` double NOT NULL,
+  `loading_point` varchar(150) NOT NULL,
+  `dumping_point` varchar(150) NOT NULL,
+  `jarak` varchar(100) NOT NULL,
+  `Jenis_BB` varchar(100) NOT NULL,
+  `Lokasi` varchar(100) NOT NULL,
+  `Pengukuran` varchar(100) NOT NULL,
+  `Status` varchar(100) NOT NULL,
+  `jam` time NOT NULL,
+  `waktu` int(11) NOT NULL,
+  `created_log` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status_action` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `log_detail_input`
+--
+
+INSERT INTO `log_detail_input` (`id_log_detail_input`, `id_temporary`, `tanggal`, `shift`, `grup`, `setting_dt`, `exca`, `tonase`, `loading_point`, `dumping_point`, `jarak`, `Jenis_BB`, `Lokasi`, `Pengukuran`, `Status`, `jam`, `waktu`, `created_log`, `status_action`) VALUES
+(1, 18, '8 November 2023 03:12:26', 'Shift 1', 'Grup C', '1', '', 300000, 'Ts Merbau', 'DH 4', '20 km', '', '', '', '', '08:54:00', 20, '2023-11-23 00:36:16', 'DIHAPUS'),
+(2, 17, '8 November 2023 03:12:26', '', '', '5', '', 40, 'Ts Merbau', 'DH 4', '20 km', '', '', '', '', '00:00:00', 0, '2023-11-23 00:39:19', 'DIUPDATE');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_fleet_info`
+--
+
+CREATE TABLE `log_fleet_info` (
+  `log_id_fleet_info` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
+  `Tanggal` varchar(100) NOT NULL,
+  `Shift` varchar(30) NOT NULL,
+  `Grup` varchar(30) NOT NULL,
+  `Status_log` varchar(100) NOT NULL,
+  `Created_log` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `log_fleet_info`
+--
+
+INSERT INTO `log_fleet_info` (`log_id_fleet_info`, `id`, `Tanggal`, `Shift`, `Grup`, `Status_log`, `Created_log`) VALUES
+(1, 8, '15 November 2023 08:08:31', 'Shift 3', 'Grup A', 'DIUPDATE', '2023-11-23 01:25:44');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_setting_fleet`
+--
+
+CREATE TABLE `log_setting_fleet` (
+  `id_log_setting_fleet` int(11) NOT NULL,
+  `Id_setting` int(11) NOT NULL,
+  `id_info` int(11) NOT NULL,
+  `Exca` varchar(40) NOT NULL,
+  `Nama_loading` varchar(90) NOT NULL,
+  `Loading_pengalihan_1` varchar(90) NOT NULL,
+  `Loading_pengalihan_2` varchar(90) NOT NULL,
+  `Loading_pengalihan_3` varchar(90) NOT NULL,
+  `Nama_dumping` varchar(90) NOT NULL,
+  `Dumping_pengalihan_1` varchar(90) NOT NULL,
+  `Dumping_pengalihan_2` varchar(90) NOT NULL,
+  `Dumping_pengalihan_3` varchar(90) NOT NULL,
+  `Jenis_BB` varchar(90) NOT NULL,
+  `Lokasi` varchar(90) NOT NULL,
+  `Pengukuran` varchar(100) NOT NULL,
+  `Status` varchar(150) NOT NULL,
+  `Status_log` varchar(100) NOT NULL,
+  `Created_log` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `log_setting_fleet`
+--
+
+INSERT INTO `log_setting_fleet` (`id_log_setting_fleet`, `Id_setting`, `id_info`, `Exca`, `Nama_loading`, `Loading_pengalihan_1`, `Loading_pengalihan_2`, `Loading_pengalihan_3`, `Nama_dumping`, `Dumping_pengalihan_1`, `Dumping_pengalihan_2`, `Dumping_pengalihan_3`, `Jenis_BB`, `Lokasi`, `Pengukuran`, `Status`, `Status_log`, `Created_log`) VALUES
+(1, 7, 8, 'Exca 04 SGJ', 'Ts Sungkai', 'Ts Niru', 'Ts Merbau', 'Ts Aren', '1A', '1B', '1B', '1B', 'BB47', 'TAL', 'Timbangan', 'Antar Stock', 'DIHAPUS', '2023-11-23 01:15:22'),
+(2, 7, 8, 'Exca 04 SGJ', 'Ts Sungkai', 'Ts Niru', 'Ts Merbau', 'Ts Aren', '1A', '1B', '1B', '1B', 'BB47', 'TAL', 'Timbangan', 'Antar Stock', 'UPDATE', '2023-11-23 01:18:32'),
+(3, 7, 8, 'Exca 04 SGJ', 'Ts Sungkai', 'Ts Niru', 'Ts Merbau', 'Ts Aren', '1A', '1B', '1B', '1A', 'BB47', 'TAL', 'Timbangan', 'Antar Stock', 'DIHAPUS', '2023-11-23 04:31:28');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pengukuran`
+--
+
+CREATE TABLE `pengukuran` (
+  `id_ukur` int(11) NOT NULL,
+  `jenis` varchar(50) NOT NULL,
+  `nilai` double NOT NULL,
+  `perusahaan` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `pengukuran`
+--
+
+INSERT INTO `pengukuran` (`id_ukur`, `jenis`, `nilai`, `perusahaan`) VALUES
+(1, 'Bypass', 29.06, 'Sumi Gita Jaya'),
+(2, 'Bypass', 54.05, 'Rifansi Dwi Putra');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `setting_dt`
 --
 
@@ -227,16 +444,6 @@ CREATE TABLE `setting_dt` (
   `id_setting_fleet` int(11) NOT NULL,
   `Nama_DT` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Dumping data for table `setting_dt`
---
-
-INSERT INTO `setting_dt` (`id_setting_dt`, `id_setting_fleet`, `Nama_DT`) VALUES
-(8, 6, 'DT01SGJ'),
-(9, 6, 'DT02SGJ'),
-(10, 7, 'DT11SGJ'),
-(11, 7, 'DT15SGJ');
 
 -- --------------------------------------------------------
 
@@ -263,12 +470,56 @@ CREATE TABLE `setting_fleet` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `setting_fleet`
+-- Triggers `setting_fleet`
 --
-
-INSERT INTO `setting_fleet` (`Id_setting`, `id_info`, `Exca`, `Nama_loading`, `Loading_pengalihan_1`, `Loading_pengalihan_2`, `Loading_pengalihan_3`, `Nama_dumping`, `Dumping_pengalihan_1`, `Dumping_pengalihan_2`, `Dumping_pengalihan_3`, `Jenis_BB`, `Lokasi`, `Pengukuran`, `Status`) VALUES
-(6, 8, 'Exca 01 SGJ', 'Ts Merbau', 'Ts Aren', 'Ts Sungkai', 'Ts infit BWE', '1A', '1B', '1B', '1B', 'BB47', 'Banko', 'Rata Rata', 'Antar Stock'),
-(7, 8, 'Exca 04 SGJ', 'Ts Sungkai', 'Ts Niru', 'Ts Merbau', 'Ts Aren', '1A', '1B', '1B', '1B', 'BB47', 'TAL', 'Timbangan', 'Antar Stock');
+DELIMITER $$
+CREATE TRIGGER `log_delete_setting` BEFORE DELETE ON `setting_fleet` FOR EACH ROW BEGIN
+    INSERT INTO log_setting_fleet
+    set 
+    Id_setting = OLD.Id_setting,
+    id_info = OLD.id_info,
+    Exca=old.Exca,
+    Nama_loading=old.Nama_loading,
+    Loading_pengalihan_1=old.Loading_pengalihan_1,
+    Loading_pengalihan_2=old.Loading_pengalihan_2,
+    Loading_pengalihan_3=old.Loading_pengalihan_3,
+    Nama_dumping=old.Nama_dumping,
+    Dumping_pengalihan_1=old.Dumping_pengalihan_1,
+    Dumping_pengalihan_2=old.Dumping_pengalihan_2,
+    Dumping_pengalihan_3=old.Dumping_pengalihan_3,
+    Jenis_BB=old.Jenis_BB,
+    Lokasi=old.Lokasi,
+    Pengukuran=old.Pengukuran,
+    Status=old.Status,
+    Created_log = NOW(),
+    Status_log="DIHAPUS"; 
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `update_setting_fleet` BEFORE UPDATE ON `setting_fleet` FOR EACH ROW BEGIN
+    INSERT INTO log_setting_fleet
+    set 
+    Id_setting = OLD.Id_setting,
+    id_info = OLD.id_info,
+    Exca=old.Exca,
+    Nama_loading=old.Nama_loading,
+    Loading_pengalihan_1=old.Loading_pengalihan_1,
+    Loading_pengalihan_2=old.Loading_pengalihan_2,
+    Loading_pengalihan_3=old.Loading_pengalihan_3,
+    Nama_dumping=old.Nama_dumping,
+    Dumping_pengalihan_1=old.Dumping_pengalihan_1,
+    Dumping_pengalihan_2=old.Dumping_pengalihan_2,
+    Dumping_pengalihan_3=old.Dumping_pengalihan_3,
+    Jenis_BB=old.Jenis_BB,
+    Lokasi=old.Lokasi,
+    Pengukuran=old.Pengukuran,
+    Status=old.Status,
+    Created_log = NOW(),
+    Status_log="UPDATE"; 
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -475,7 +726,6 @@ CREATE TABLE `unit_exca` (
 INSERT INTO `unit_exca` (`id_unit`, `unit`, `mitra`) VALUES
 (1, 'Exca 01 SGJ', 'Sumi Gita Jaya'),
 (2, 'Exca 02 SGJ', 'Sumi Gita Jaya'),
-(3, 'DH 4', '33'),
 (4, 'Exca 04 SGJ', 'Sumi Gita Jaya'),
 (5, 'Exca 05 SGJ', 'Sumi Gita Jaya'),
 (6, 'Exca 06 SGJ', 'Sumi Gita Jaya'),
@@ -490,9 +740,34 @@ INSERT INTO `unit_exca` (`id_unit`, `unit`, `mitra`) VALUES
 (15, 'Exca 3020 RDP', 'Rifansi Dwi Putra'),
 (16, 'Exca 3021 RDP', 'Rifansi Dwi Putra');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `verify`
+--
+
+CREATE TABLE `verify` (
+  `id_verify` int(11) NOT NULL,
+  `password_hash` varchar(100) NOT NULL,
+  `active` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `verify`
+--
+
+INSERT INTO `verify` (`id_verify`, `password_hash`, `active`) VALUES
+(1, '$2y$10$zQJ2UDeYV1GvFYcRtnyjPeUxDzy9Rah7mHayKgsgT0v2mKsGVDTCC', 1);
+
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `computer_info`
+--
+ALTER TABLE `computer_info`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `detail_input`
@@ -531,6 +806,30 @@ ALTER TABLE `loading`
   ADD PRIMARY KEY (`id_loading`);
 
 --
+-- Indexes for table `log_detail_input`
+--
+ALTER TABLE `log_detail_input`
+  ADD PRIMARY KEY (`id_log_detail_input`);
+
+--
+-- Indexes for table `log_fleet_info`
+--
+ALTER TABLE `log_fleet_info`
+  ADD PRIMARY KEY (`log_id_fleet_info`);
+
+--
+-- Indexes for table `log_setting_fleet`
+--
+ALTER TABLE `log_setting_fleet`
+  ADD PRIMARY KEY (`id_log_setting_fleet`);
+
+--
+-- Indexes for table `pengukuran`
+--
+ALTER TABLE `pengukuran`
+  ADD PRIMARY KEY (`id_ukur`);
+
+--
 -- Indexes for table `setting_dt`
 --
 ALTER TABLE `setting_dt`
@@ -563,8 +862,20 @@ ALTER TABLE `unit_exca`
   ADD PRIMARY KEY (`id_unit`);
 
 --
+-- Indexes for table `verify`
+--
+ALTER TABLE `verify`
+  ADD PRIMARY KEY (`id_verify`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `computer_info`
+--
+ALTER TABLE `computer_info`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `detail_input`
@@ -582,13 +893,13 @@ ALTER TABLE `dumping`
 -- AUTO_INCREMENT for table `fleet_info`
 --
 ALTER TABLE `fleet_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `jarak`
 --
 ALTER TABLE `jarak`
-  MODIFY `Id_jarak` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `Id_jarak` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `laporan`
@@ -603,10 +914,34 @@ ALTER TABLE `loading`
   MODIFY `id_loading` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
+-- AUTO_INCREMENT for table `log_detail_input`
+--
+ALTER TABLE `log_detail_input`
+  MODIFY `id_log_detail_input` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `log_fleet_info`
+--
+ALTER TABLE `log_fleet_info`
+  MODIFY `log_id_fleet_info` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `log_setting_fleet`
+--
+ALTER TABLE `log_setting_fleet`
+  MODIFY `id_log_setting_fleet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `pengukuran`
+--
+ALTER TABLE `pengukuran`
+  MODIFY `id_ukur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `setting_dt`
 --
 ALTER TABLE `setting_dt`
-  MODIFY `id_setting_dt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_setting_dt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `setting_fleet`
@@ -630,7 +965,13 @@ ALTER TABLE `unit_dt`
 -- AUTO_INCREMENT for table `unit_exca`
 --
 ALTER TABLE `unit_exca`
-  MODIFY `id_unit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_unit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `verify`
+--
+ALTER TABLE `verify`
+  MODIFY `id_verify` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
