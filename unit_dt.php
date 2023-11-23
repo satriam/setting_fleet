@@ -79,7 +79,7 @@ if(!empty($_POST['add_barang'])){
                                 <a class="btn btn-primary btn-xs" href="edit.php?id=<?php echo $d['id_unit']; ?>">
                                 <i class="fa fa-pen fa-xs"></i> Edit</a>
                                 <a class="btn btn-danger btn-xs" href="?id=<?php echo $d['id_unit']; ?>" 
-                                onclick="javascript:return confirm('Hapus Data Barang ?');">
+                                onclick="javascript:return confirm('Hapus Data Unit DT ?');">
                                 <i class="fa fa-trash fa-xs"></i> Hapus</a>
                             </td>
 						</tr>

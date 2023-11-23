@@ -371,7 +371,7 @@ if (isset($_POST['add_info'])) {
                                 <a class="btn btn-primary btn-xs" href="edit_setting_fleet.php?id=<?php echo $d['Id_setting']; ?>">
                                 <i class="fa fa-pen fa-xs"></i> Edit</a>
                                 <a class="btn btn-danger btn-xs" href="?id=<?php echo $d['Id_setting']; ?>" 
-                                onclick="javascript:return confirm('Hapus Data Barang ?');">
+                                onclick="javascript:return confirm('Hapus Data Setting Fleet ?');">
                                 <i class="fa fa-trash fa-xs"></i> Hapus</a>
                             </td>
 						</tr>

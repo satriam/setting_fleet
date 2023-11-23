@@ -457,11 +457,11 @@ if(!empty($_POST['simpan_laporan'])){
 
     
 </script>
-<script>
+<!-- <script>
         $(document).ready(function () {
             $('#exca, #bb, #ukur, #status').hide();
         });
-    </script>
+    </script> -->
 
 
 

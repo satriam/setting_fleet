@@ -37,8 +37,6 @@
                             <td><?php echo $d['tanggal']; ?></td>
                          
                             <td>
-                            <!-- <a class="btn btn-primary btn-xs" href="detail_laporan.php?id=<?php echo $d['id_laporan']; ?>">
-                                <i class="fa fa-pen fa-xs"></i> detail</a> -->
                             <a class="btn btn-primary btn-xs" onclick="viewDetail(<?php echo $d['id_laporan']; ?>)">
                                 <i class="fa fa-pen fa-xs"></i> detail</a>
                             </td>

@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to check if the system is locked and update the UI accordingly
     function checkLockStatus() {
-        const lockTime = localStorage.getItem('lockTime');
+        const lockTime = localStorage.getItem('?hs78gjdhf9873hfjdbbc7');
         const currentTime = new Date().getTime();
         const sixHoursInMillis = 6 * 60 * 60 * 1000; // 6 hours in milliseconds
 
@@ -150,19 +150,80 @@ document.addEventListener('DOMContentLoaded', function () {
     // Check the lock status when the page loads
     checkLockStatus();
 
-    // Event listener for the unlock button
-    unlockButton.addEventListener('click', function () {
-        const enteredPassword = unlockPasswordInput.value;
-        // Add your password validation logic here
-        // For simplicity, let's assume the correct password is 'password'
-        if (enteredPassword === 'rehandling2023!') {
-            localStorage.setItem('lockTime', new Date().getTime());
-            showUnlockedContent();
-            hideLockedContent(); // Hide the locked message when unlocked
-        } else {
-            alert('Incorrect Password. Please try again.');
+    // // Event listener for the unlock button
+    // unlockButton.addEventListener('click', function () {
+    //     const enteredPassword = unlockPasswordInput.value;
+    //     // Add your password validation logic here
+    //     // For simplicity, let's assume the correct password is 'password'
+    //     if (enteredPassword === 'rehandling2023!') {
+    //         localStorage.setItem('lockTime', new Date().getTime());
+    //         showUnlockedContent();
+    //         hideLockedContent(); // Hide the locked message when unlocked
+    //     } else {
+    //         alert('Incorrect Password. Please try again.');
+    //     }
+    // });
+
+
+// Event listener for the unlock button
+unlockButton.addEventListener('click', function () {
+    const enteredPassword = unlockPasswordInput.value;
+
+    // Kirim data ke server untuk verifikasi
+    fetch('verify_password.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `password=${encodeURIComponent(enteredPassword)}`,
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
         }
-    });
+        return response.json();
+    })
+    .then(data => {
+        if (data.success) {     
+            // Dapatkan informasi sistem operasi dan browser
+            const os = window.navigator.platform;
+            const browser = window.navigator.userAgent;
+
+    // Introduce a delay before making the next request
+    setTimeout(() => {
+        // Kirim data ke server PHP menggunakan metode POST
+        fetch('save_computer_info.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `operatingSystem=${encodeURIComponent(os)}&browser=${encodeURIComponent(browser)}`,
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.text();
+        })
+        .then(message => {
+            console.log(message);
+            // Lakukan tindakan selanjutnya setelah data disimpan
+            localStorage.setItem('?hs78gjdhf9873hfjdbbc7', new Date().getTime());
+            showUnlockedContent();
+            hideLockedContent(); 
+        })
+        .catch(error => console.error('Failed to save computer info:', error.message));
+    }, 1000); // Adjust the delay (in milliseconds) as needed
+}
+               
+  else {
+            alert('Gagal Masuk! ' + data.error); // Include specific error message
+        }
+    })
+    .catch(error => console.error('Failed to verify password:', error.message));
+});
+
+
 
     // Event listener for the "OK" button on the lock popup modal
     const lockPopupOkButton = document.querySelector('#lockPopupModal .btn-primary');

@@ -134,7 +134,7 @@ body {
 <div id="unlockedContent">
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-purple text-white shadow-sm sticky-top d-md-none d-lg-none d-xl-none">
-  <a class="navbar-brand" href="https://www.youtube.com/satriamulya"><i class="fa fa-truck mr-1">REHANDLING BUKIT ASAM</i><b>
+  <a class="navbar-brand" href="https://satriam.github.io" target=_blank><i class="fa fa-truck mr-1">REHANDLING BUKIT ASAM</i><b>
  </b></a>
   <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <i class="fa fa-bars"></i>
@@ -159,18 +159,13 @@ body {
                     <li class="nav-item">
                         <a class="nav-link" href="laporan.php"><i class="fa fa-table text-purple mr-2"></i>Laporan</a>
                     </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link putih" href="pengaturan.php"><i class="fa fa-cog mr-2"></i>Pengaturan</a>
-                    </li> -->
-                    <!-- <li class="nav-item">
-                        <a class="nav-link putih" href="logout.php" onclick="javascript:return confirm('Anda yakin ingin keluar ?');"><i class="fa fa-power-off mr-2"></i>Keluar</a>
-                    </li> -->
+                  
                 </ul>
             </div>
 </nav>
 
 <div class="bg-purple text-center py-2 shadow-sm sticky-top d-none d-md-block">
-<a class="navbar-brand text-white" href="https://www.youtube.com/satriamulya"><i class="fa fa-truck mr-1"> REHANDLING BUKIT ASAM</i><b>
+<a class="navbar-brand text-white" href="https://satriam.github.io" target=_blank><i class="fa fa-truck mr-1"> REHANDLING BUKIT ASAM</i><b>
   </b></a>
 </div>
 <br>
@@ -204,12 +199,7 @@ body {
                     <li class="nav-item" id="laporan">
                         <a class="nav-link" href="laporan.php"><i class="fa fa-table text-purple mr-2"></i>Laporan</a>
                     </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="pengaturan.php"><i class="fa fa-cog text-purple mr-2"></i>Pengaturan</a>
-                    </li> -->
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="logout.php"onclick="javascript:return confirm('Anda yakin ingin keluar ?');"><i class="fa fa-power-off text-purple mr-2"></i>Keluar</a>
-                    </li> -->
+                 
                 </ul>
          </div>
     </div>
