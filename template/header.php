@@ -160,6 +160,12 @@ body {
                         <a class="nav-link" href="jarak.php"><i class="fa fa-location-arrow text-purple mr-2"></i>Jarak</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="loading.php"><i class="fa fa-location-arrow text-purple mr-2"></i>Loading</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dumping.php"><i class="fa fa-location-arrow text-purple mr-2"></i>Dumping</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="laporan.php"><i class="fa fa-table text-purple mr-2"></i>Laporan</a>
                     </li>
                   
