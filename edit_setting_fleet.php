@@ -11,17 +11,18 @@ include "config.php";
 if(isset($_POST['update']))
 {
     $id = $_POST['id'];
-    $exca = $data['Exca'];
-    $loading = $data['Nama_loading'];
-    $lp1 = $data['Loading_pengalihan_1'];
-    $lp2 = $data['Loading_pengalihan_2'];
-    $lp3 = $data['Loading_pengalihan_3'];
-    $dumping = $data['Nama_dumping'];
-    $dp1 = $data['Dumping_pengalihan_1'];
-    $dp2 = $data['Dumping_pengalihan_1'];
-    $dp3 = $data['Dumping_pengalihan_1'];
-    $bb = $data['Jenis_BB'];
-    $result = mysqli_query($conn, "UPDATE unit SET unit='$nama',mitra='$mitra' WHERE id_unit=$id");
+    $exca = $_POST['Exca'];
+    $loading = $_POST['Loading'];
+    $lp1 = $_POST['Loading_pengalihan_1'];
+    $lp2 = $_POST['Loading_pengalihan_2'];
+    $lp3 = $_POST['Loading_pengalihan_3'];
+    $dumping = $_POST['Dumping'];
+    $dp1 = $_POST['Dumping_pengalihan_1'];
+    $dp2 = $_POST['Dumping_pengalihan_2'];
+    $dp3 = $_POST['Dumping_pengalihan_3'];
+    $bb = $_POST['jenis_bb'];
+    $result = mysqli_query($conn, "UPDATE setting_fleet SET Exca='$exca',Nama_loading='$loading',Loading_pengalihan_1='$lp1',Loading_pengalihan_2='$lp2',Loading_pengalihan_3='$lp3',
+    Nama_dumping='$dumping',Dumping_pengalihan_1='$dp1',Dumping_pengalihan_2='$dp2' ,Dumping_pengalihan_3='$dp3',Jenis_BB='$bb' WHERE Id_setting ='$id'");
     if(!$result){
         echo "
         <div class='alert alert-danger alert-dismissible fade show' role='alert'>
@@ -49,7 +50,7 @@ if(isset($_POST['update']))
                 countdownElement.textContent = countdown;
     
                 if (countdown <= 0) {
-                    window.location.href = 'unit.php'; // Alamat tujuan pengalihan
+                    window.location.href = 'setting_fleet.php'; // Alamat tujuan pengalihan
                 } else {
                     setTimeout(updateCountdown, 1000); // Perbarui setiap 1 detik
                 }
@@ -277,7 +278,7 @@ while($data = mysqli_fetch_array($result))
                             <div class="input-group">
                             <input type="text" name="jenis_bb" class="form-control" value="<?php echo $bb?>"required>
                                 <div class="input-group-append">
-                                    <button name="add_fleet" value="simpan" class="btn btn-purple" type="submit">
+                                    <button name="update" value="simpan" class="btn btn-purple" type="submit">
                                     <i class="fa fa-plus mr-2"></i>Tambah</button>
                                 </div>
                             </div>
