@@ -151,7 +151,10 @@ body {
                         <a class="nav-link" href="setting_dt.php"><i class="fa fa-tasks text-purple mr-2" aria-hidden="true"></i>Setting Dump Truck</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="unit.php"><i class="fa fa-car text-purple mr-2" aria-hidden="true"></i>Unit</a>
+                        <a class="nav-link" href="unit.php"><i class="fa fa-car text-purple mr-2" aria-hidden="true"></i>Unit Exca</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="unit_dt.php"><i class="fa fa-car text-purple mr-2" aria-hidden="true"></i>Unit Dump Truck</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="jarak.php"><i class="fa fa-location-arrow text-purple mr-2"></i>Jarak</a>
@@ -190,8 +193,11 @@ body {
                     <li class="nav-item" id="settingdt">
                         <a class="nav-link" href="setting_dt.php"><i class="fa fa-tasks text-purple mr-2" aria-hidden="true"></i>Setting Dump Truck</a>
                     </li>
-                    <li class="nav-item" id="unit">
-                        <a class="nav-link" href="unit.php"><i class="fa fa-car text-purple mr-2" aria-hidden="true"></i>Unit</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="unit.php"><i class="fa fa-car text-purple mr-2" aria-hidden="true"></i>Unit Exca</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="unit_dt.php"><i class="fa fa-car text-purple mr-2" aria-hidden="true"></i>Unit Dump Truck</a>
                     </li>
                     <li class="nav-item" id="jarak">
                         <a class="nav-link" href="jarak.php"><i class="fa fa-location-arrow text-purple mr-2"></i>Jarak</a>
